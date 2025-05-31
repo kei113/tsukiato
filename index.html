@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nama Idol Group | Website Resmi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<script src="script.js"></script>
+
+<body>
+    <header class="main-header">
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#news">NEWS</a></li>
+                <li><a href="#discography">MOVIE</a></li>
+                <li><a href="#profile">PROFILE</a></li>
+                <li><a href="#schedule">SCHEDULE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="video-background-container">
+            <iframe
+                src="https://www.youtube.com/embed/cG0lahVKiIw?autoplay=1&mute=1&loop=1&playlist=cG0lahVKiIw&controls=0&showinfo=0&autohide=1&modestbranding=1&rel=0"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen 
+                title="YouTube Background Video">
+            </iframe>
+        </div>
+        <div class="hero-overlay"></div> <div class="hero-content"> <h1 class="animate-fadeInDown"><img src="assets/logo__wh.png" alt="Logo Idol Group"></h1>
+            <a href="#profile" class="btn btn-primary animate-zoomIn">プロフィール</a>
+        </div>
+    </section>
+
+<section id="profile" class="profile-section">
+    <div class="container">
+        <h2>プロフィールメンバー</h2>
+        <div class="profile-grid">
+
+            <a href="member1-detail.html" class="profile-card-link animate-fadeInUp-scroll"> <div class="profile-card">
+                    <img src="assets/yuuna.jpeg" alt="Nama Member 1"> <div class="member-name-plate"> <h3></h3> </div>
+                    <div class="profile-hover-info"> <h4>苗加結菜</h4>
+                    </div>
+                </div>
+            </a>
+
+            <a href="member2-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-1">
+                <div class="profile-card">
+                    <img src="assets/rena.jpeg" alt="Nama Member 2">
+                    <div class="member-name-plate">
+                        <h3></h3>
+                    </div>
+                    <div class="profile-hover-info">
+                        <h4>美南れな</h4>
+                    </div>
+                </div>
+            </a>
+
+            <a href="member3-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-2">
+                <div class="profile-card">
+                    <img src="assets/hayasaki.jpeg" alt="Nama Member 3">
+                    <div class="member-name-plate">
+                        <h3></h3>
+                    </div>
+                    <div class="profile-hover-info">
+                        <h4>早﨑優奈</h4>
+                    </div>
+                </div>
+            </a>
+
+            <a href="member4-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-3"> <div class="profile-card">
+                    <img src="assets/aoi.jpeg" alt="Nama Member 4">
+                    <div class="member-name-plate">
+                        <h3></h3>
+                    </div>
+                    <div class="profile-hover-info">
+                        <h4>葵音琴</h4>
+                    </div>
+                </div>
+            </a>
+
+            <a href="member5-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-4">
+                <div class="profile-card">
+                    <img src="assets/hono.jpeg" alt="Nama Member 5">
+                    <div class="member-name-plate">
+                        <h3></h3>
+                    </div>
+                    <div class="profile-hover-info">
+                        <h4>羽﨑ほの</h4>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+    <section id="news" class="news-section">
+        <div class="container">
+            <h2>ニュース</h2>
+            <div class="news-grid">
+                <article class="news-item animate-slideInLeft-scroll">
+                    <img src="assets/news1.jpeg" alt="Berita 1">
+                    <div class="news-content">
+                        <h3>定期観測#7開催決定</h3>
+                        <span class="news-date">2025年4月24日</span>
+                        <p></p>
+                        <a href="#" class="read-more">More</a>
+                    </div>
+                </article>
+                <article class="news-item animate-slideInRight-scroll">
+                    <img src="assets/news2.jpeg" alt="Berita 2">
+                    <div class="news-content">
+                        <h3>羽﨑ほの生誕祭2025 ~La magie~ </h3>
+                        <span class="news-date">2025年4月20日</span>
+                        <p></p>
+                        <a href="#" class="read-more">More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-social">
+                    <a href="#" aria-label="Link ke Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
+                    <a href="#" aria-label="Link ke Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Link ke YouTube"><img src="images/icon-youtube.svg" alt="YouTube"></a>
+                </div>
+                <p>&copy; <span id="year"></span> 月に足跡を残した少女達は一体何を見たのか... All Rights Reserved.</p>
+                <p><a href="#">Contact</a> | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // Script sederhana untuk tahun di footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // CATATAN: Untuk animasi scroll (kelas .animate-*-scroll),
+        // Anda perlu JavaScript seperti Intersection Observer API atau library seperti ScrollReveal.js
+        // Contoh sederhana dengan Intersection Observer:
+        const animatedElements = document.querySelectorAll('.animate-fadeInUp-scroll, .animate-slideInLeft-scroll, .animate-slideInRight-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: unobserve setelah animasi berjalan
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger animasi saat 10% elemen terlihat
+        });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) { // Angka 50 bisa disesuaikan (jarak scroll sebelum header berubah)
+                header.style.backgroundColor = 'rgba(48, 25, 52, 0.9)'; // Ungu tua semi-transparan
+                // header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)'; // Munculkan lagi shadow jika perlu
+            } else {
+                header.style.backgroundColor = 'transparent';
+                // header.style.boxShadow = 'none'; // Sembunyikan shadow jika perlu
+            }
+        });
+
+        function updateHeaderHeight() {
+            const header = document.querySelector('.main-header');
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', updateHeaderHeight);
+        window.addEventListener('resize', updateHeaderHeight); // Update jika ukuran berubah
+
+        // Pastikan DOM sudah sepenuhnya dimuat sebelum menjalankan script
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // 1. Pilih semua elemen kartu yang ingin diberi efek
+            const profileCards = document.querySelectorAll('.profile-card-link');
+
+            // 2. Loop melalui setiap kartu dan tambahkan event listener
+            profileCards.forEach(function(card) {
+                // Saat mouse masuk ke area kartu
+                card.addEventListener('mouseenter', function() {
+                    // Tambahkan kelas .card-is-hovered
+                    card.classList.add('card-is-hovered');
+                });
+
+                // Saat mouse keluar dari area kartu
+                card.addEventListener('mouseleave', function() {
+                    // Hapus kelas .card-is-hovered
+                    card.classList.remove('card-is-hovered');
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

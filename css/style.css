@@ -1,0 +1,687 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --header-height: 70px; /* PERKIRAAN TINGGI HEADER ANDA - SESUAIKAN INI */
+                           /* Anda bisa ukur atau hitung dari padding + tinggi konten header */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333; /* Warna teks default, akan di-override di beberapa section */
+    background-color: #FFFFFF; /* Background putih default */
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden; /* Clear floats */
+    padding: 20px 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #9370DB; /* Warna link default - Ungu Muda Aksen */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Utility Classes (untuk animasi - implementasi di bawah atau dengan JS) */
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out 0.3s forwards; /* Ada delay sedikit */
+}
+.animate-zoomIn {
+    animation: zoomIn 0.6s ease-out 0.6s forwards; /* Ada delay lebih lama */
+}
+
+.animate-fadeInUp-scroll,
+.animate-slideInLeft-scroll,
+.animate-slideInRight-scroll {
+    opacity: 0;
+    transform: translateY(30px); /* Default untuk fadeInUp */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-slideInLeft-scroll {
+    transform: translateX(-50px);
+}
+.animate-slideInRight-scroll {
+    transform: translateX(50px);
+}
+
+.animate-fadeInUp-scroll.visible,
+.animate-slideInLeft-scroll.visible,
+.animate-slideInRight-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transform: translateX(0);
+}
+
+.delay-1 { transition-delay: 0.2s !important; } /* Penting untuk override */
+.delay-2 { transition-delay: 0.4s !important; }
+
+/* Header / Navigasi */
+.main-header {
+    /* background-color: #301934; */ /* Ungu Tua - KOMENTARI ATAU HAPUS BARIS INI */
+    background-color: transparent; /* UBAH MENJADI TRANSPARAN */
+    color: #FFFFFF;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */ /* Anda mungkin ingin menghapus atau menyesuaikan shadow ini */
+    transition: background-color 0.3s ease-in-out; /* Opsional: untuk transisi jika Anda ingin mengubahnya saat scroll */
+}
+
+.main-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.main-header .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.main-header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-header nav ul li {
+    margin-left: 25px;
+}
+
+.main-header nav ul li a {
+    color: #FFFFFF; /* Pastikan warna link kontras dengan background di belakang header */
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.main-header nav ul li a:hover {
+    color: #E6E6FA; /* Lavender, atau warna lain yang kontras */
+}
+
+
+/* Hero Section */
+.hero-section {
+    height: 100vh; /* Tinggi viewport penuh */
+    /* Hapus atau komentari background-image jika ada sebelumnya */
+    /* background-image: url('../images/hero-background.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Untuk overlay dan konten di atasnya */
+    color: #FFFFFF;
+    overflow: hidden; /* Penting agar iframe tidak keluar batas */
+    margin-top: calc(-1 * var(--header-height)); /* Tarik section ini ke atas sejauh tinggi header */
+    padding-top: var(--header-height); /* Dorong konten di dalamnya ke bawah, agar tidak tertutup header */
+                                        /* flex align-items akan bekerja pada area setelah padding ini */
+    /* box-sizing: border-box; sudah diatur global via '*' */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(200, 90, 219, 0.6); /* Overlay Ungu Tua Transparan */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative; /* Di atas overlay */
+    z-index: 2;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5em; /* Sesuaikan ukuran font */
+    margin-bottom: 20px;
+    /* Animasi akan ditambahkan oleh kelas .animate-fadeInDown */
+}
+
+.hero-content h1 img {
+    width: 1000px; /* GANTI DENGAN UKURAN YANG ANDA INGINKAN */
+    /* Atau bisa juga menggunakan persentase, misalnya: */
+    /* width: 80%; */
+    /* max-width: 500px; */ /* Batas maksimal jika menggunakan persentase */
+
+    height: auto; /* Ini penting untuk menjaga rasio aspek gambar agar tidak distorsi */
+    display: block; /* Membantu jika ada masalah dengan spasi di sekitar gambar */
+    margin-left: auto; /* Untuk menengahkan gambar jika parentnya (h1) lebih lebar */
+    margin-right: auto;/* Untuk menengahkan gambar jika parentnya (h1) lebih lebar */
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    /* Animasi akan ditambahkan oleh kelas .animate-fadeInUp */
+}
+
+.video-background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Pastikan di bawah overlay dan content */
+    pointer-events: none; /* Agar tidak bisa diklik/interaksi dengan video */
+    background-image: url('C:/Users/Nevermore/Documents/WebsiteProject/Idol/assets/hero.jpeg'); /* Gambar fallback */
+    background-size: cover;
+    background-position: center;
+}
+
+.video-background-container iframe {
+    /* Trik untuk membuat iframe responsif dan mengisi kontainer (rasio 16:9) */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw; /* Lebar viewport */
+    height: 56.25vw; /* Tinggi viewport untuk rasio 16:9 (9 / 16 * 100) */
+    min-width: 177.77vh; /* Lebar minimum untuk rasio 16:9 (16 / 9 * 100) */
+    min-height: 100vh; /* Tinggi viewport */
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Mirip background-size: cover */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 25, 52, 0.6); /* Overlay Ungu Tua Transparan */
+    z-index: 1; /* Di atas video, di bawah konten teks */
+}
+
+.hero-content {
+    position: relative; /* Di atas overlay */
+    z-index: 2; /* Paling atas */
+    padding: 20px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #9370DB; /* Ungu Muda Aksen */
+    color: #FFFFFF;
+    border: 2px solid #9370DB;
+}
+
+.btn-primary:hover {
+    background-color: #7B68EE; /* Ungu Muda Aksen lebih gelap saat hover */
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #301934; /* Ungu Tua */
+    border: 2px solid #301934;
+}
+
+.btn-secondary:hover {
+    background-color: #301934;
+    color: #FFFFFF;
+}
+
+/* Profile Section */
+.profile-section {
+    padding-top: 60px;    /* Padding vertikal atas untuk section */
+    padding-bottom: 60px; /* Tambahkan padding horizontal untuk ruang di layar kecil */
+    background-color: #F0E8FF; /* Warna latar belakang ungu muda yang lembut, sesuaikan */
+}
+
+.profile-section h2 {
+    text-align: center;
+    color: #301934; /* Ungu Tua */
+    font-size: 2.5em;
+    margin-bottom: 50px; /* Beri jarak lebih ke kartu */
+}
+
+
+.profile-grid {
+    display: grid;
+
+    /* Menggunakan 'auto-fit' akan membuat kolom yang ada meregang untuk mengisi ruang,
+       jika 'auto-fill' meninggalkan ruang kosong di akhir baris.
+       Ini bisa membantu mencapai efek "mentok". */
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); /* Sesuaikan 230px jika perlu */
+
+    gap: 5px; /* Jarak antar kartu */
+
+    width: 100%; /* Ambil lebar penuh yang tersedia */
+    max-width: 1200px; /* Hapus atau timpa batasan max-width sebelumnya */
+    margin-left: auto;  /* Hapus atau timpa margin horizontal sebelumnya */
+    margin-right: auto; /* Hapus atau timpa margin horizontal sebelumnya */
+    margin: 0 auto; /* Tengah-kan grid di dalam container */
+
+    /* Tambahkan padding horizontal di sini agar kartu tidak menempel ke tepi layar */
+    padding: 0;
+    box-sizing: border-box; /* Padding horizontal untuk ruang di layar kecil */
+
+}
+
+
+.profile-card {
+            width: 100%;        /* Kartu mengambil lebar penuh dari .test-card-container */
+            height: 800px;            
+            background-color: #301934; /* Warna ungu tua jika gambar gagal dimuat */
+            overflow: hidden;
+            transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+
+.profile-card img {
+            display: block;    /* Menghilangkan spasi ekstra jika gambar inline */
+            width: 100%;       /* Gambar mengisi 100% lebar .profile-card */
+            height: 100%;      /* Gambar mengisi 100% tinggi .profile-card (tinggi ditentukan oleh aspect-ratio) */
+            object-position: center; /* Posisikan gambar di tengah */
+            
+            /* KUNCI UTAMA: OBJECT-FIT */
+            object-fit: cover; /* Membuat gambar menutupi area, mempertahankan rasio aspeknya, dan memotong jika perlu.
+                                   Ini yang membuat gambar Anda "penuh" seperti di contoh.jpg */
+            
+            /* Tidak perlu border-radius di img jika .profile-card-link sudah overflow:hidden */
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transisi untuk zoom gambar */
+}
+
+
+
+
+
+
+
+
+.profile-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden; /* Penting untuk menjaga bentuk kartu saat scaling internal */
+    box-shadow: 0 5px 18px rgba(48, 25, 52, 0.15);
+
+    position: relative; /* Tambahkan ini agar z-index saat hover berfungsi */
+    /* Transisi untuk semua properti yang berubah saat hover (transform, box-shadow) */
+    /* Sesuaikan durasi (0.3s) dan timing function (ease-out) sesuai selera */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, z-index 0s 0.3s;
+    /* z-index di-delay agar tidak langsung kembali saat mouse keluar cepat */
+}
+
+.profile-card-link:hover {
+    /* Menaikkan kartu sedikit ke atas (opsional, tapi menambah efek 3D) */
+    /* transform: translateY(-8px) scale(1.07); */ /* Contoh lama */
+
+    /* KUNCI UTAMA: Perbesar ukuran kartu */
+    /* Nilai scale(1.07) berarti 7% lebih besar. Anda bisa coba nilai lain seperti 1.1 (10% lebih besar) atau 1.05 */
+    transform: scale(1.1); /* CONTOH: Kartu membesar 10% */
+    /* Anda juga bisa mengkombinasikan dengan translateY jika suka: */
+    transform: translateY(-10px) scale(1.1);
+    /* Perjelas bayangan agar terlihat lebih "mengambang" */
+    box-shadow: 0 15px 35px rgba(48, 25, 52, 0.3);
+    /* KUNCI UTAMA: Naikkan z-index agar kartu yang di-hover muncul di atas kartu lain */
+    /* Ini penting jika kartu yang membesar berpotensi tumpang tindih dengan kartu di sebelahnya */
+    z-index: 10;
+    transition-delay: 0s; /* Pastikan transisi z-index kembali normal saat tidak hover */
+}
+
+.profile-card-link:hover .profile-card img {
+    transform: scale(1.12); /* Efek zoom pada gambar saat hover */
+}
+
+.member-name-plate {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 10px; /* Padding lebih besar */
+    /* Gradient dari bawah ke atas, lebih gelap di bawah */
+    background: linear-gradient(to top, rgba(15, 5, 15, 0.92), rgba(25, 8, 25, 0.75) 60%, transparent);
+    color: #FFFFFF;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 2; /* Di atas gambar */
+    box-sizing: border-box;
+}
+
+.member-name-plate h3 {
+    margin: 0;
+    font-size: 1.4em; /* Ukuran font nama, sesuaikan */
+    font-weight: 700; /* Lebih tebal */
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* Bayangan teks agar lebih terbaca */
+}
+
+.profile-hover-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(152, 69, 201, 0.5);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    z-index: 3; /* Di atas segalanya di dalam kartu */
+    box-sizing: border-box;
+}
+
+.profile-card-link:hover .member-name-plate {
+    opacity: 0; /* Sembunyikan name-plate default saat hover */
+    transform: translateY(10px); /* Sedikit turun saat menghilang */
+}
+
+.profile-card-link:hover .profile-hover-info {
+    opacity: 1;
+    visibility: visible;
+}
+
+.profile-hover-info h4 {
+    font-family: 'Poppins', sans-serif; /* Font yang sama dengan judul section */
+    font-size: 1.8em; /* Nama lebih besar saat hover */
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.profile-hover-info p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-width: 90%;
+}
+
+.profile-hover-info span { /* Teks "Sentuh untuk Detail" */
+    font-size: 0.95em;
+    font-weight: 600;
+    padding: 10px 18px;
+    border: 2px solid #D8BFD8; /* Warna Thistle (ungu muda pucat) untuk border */
+    border-radius: 25px;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    cursor: pointer; /* Menunjukkan bisa diklik, meskipun seluruh kartu adalah link */
+}
+
+.profile-hover-info span:hover { /* Efek hover untuk tombol kecil ini jika diinginkan */
+    background-color: #D8BFD8;
+    color: #301934; /* Ungu tua */
+    transform: scale(1.05);
+}
+
+/* Sesuaikan animasi scroll jika masih digunakan */
+.animate-fadeInUp-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Atur delay jika perlu */
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.2s !important; }
+.delay-3 { transition-delay: 0.3s !important; }
+.delay-4 { transition-delay: 0.4s !important; }
+
+/* News Section */
+.news-section {
+    padding: 60px 0;
+    background-color: #FFFFFF;
+}
+
+.news-section h2 {
+    text-align: center;
+    color: #301934; /* Ungu Tua */
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.news-item {
+    background-color: #F8F8FF; /* Latar belakang item berita */
+    border-radius: 8px;
+    overflow: hidden; /* Agar gambar tidak keluar dari border-radius */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(48, 25, 52, 0.12);
+}
+
+.news-item img {
+    width: 100%;
+    height: 200px; /* Sesuaikan tinggi gambar berita */
+    object-fit: cover;
+}
+
+.news-content {
+    padding: 20px;
+}
+
+.news-content h3 {
+    color: #301934;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.news-date {
+    font-size: 0.85em;
+    color: #777;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.news-content p {
+    font-size: 0.95em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    font-weight: 600;
+    color: #9370DB;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #7B68EE;
+}
+
+
+/* Footer */
+.main-footer {
+    background-color: #680dbd;
+    color: #E6E6FA; /* Teks Lavender/Putih keunguan */
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: auto;
+}
+
+.footer-social {
+    margin-bottom: 20px;
+}
+
+.footer-social a {
+    margin: 0 10px;
+    display: inline-block; /* Untuk animasi hover */
+    transition: transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    transform: scale(1.2);
+}
+
+.footer-social img {
+    width: 28px; /* Ukuran ikon sosial media */
+    height: 28px;
+    filter: invert(90%) sepia(15%) saturate(200%) hue-rotate(200deg) brightness(100%) contrast(95%); /* Membuat ikon jadi warna terang */
+}
+
+.main-footer p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.main-footer a {
+    color: #E6E6FA;
+}
+
+.main-footer a:hover {
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+.hero-content h1 img#idolLogo { /* Atau gunakan selector yang lebih spesifik jika perlu */
+    /* ... gaya ukuran gambar Anda yang sudah ada ... */
+
+    /* Membuat gambar tidak merespons event mouse (termasuk klik kanan dan drag) */
+    pointer-events: none;
+
+    /* Tambahan untuk mencegah drag pada beberapa browser (mungkin tidak selalu efektif) */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+
+    /* Untuk mencegah seleksi gambar jika ada teks di sekitarnya */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Contoh Animasi CSS Sederhana (Bisa dikembangkan) */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out 0.3s forwards; /* Ada delay sedikit */
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.6s ease-out 0.6s forwards; /* Ada delay lebih lama */
+}
+
+
+/* Media Queries untuk Responsiveness (Contoh Dasar) */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+    }
+    .profile-grid, .news-grid {
+        grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+    }
+    .main-header nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-header nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap; /* Agar muat jika banyak menu */
+        justify-content: center;
+    }
+    .main-header nav ul li {
+        margin: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
