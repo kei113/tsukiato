@@ -83,31 +83,30 @@ img {
 
 /* Header / Navigasi */
 .main-header {
-    /* background-color: #301934; */ /* Ungu Tua - KOMENTARI ATAU HAPUS BARIS INI */
-    background-color: transparent; /* UBAH MENJADI TRANSPARAN */
-    color: #FFFFFF;
-    padding: 15px 0;
-    position: sticky;
+    /* background-color: #FFFFFF; */ /* Atau transparent, atau ungu solid */
+    /* color: #301934; */ /* Warna teks jika header terang */
+    padding: 25px 0; /* Padding vertikal untuk tinggi header */
+    position: sticky; /* Membuat header menempel di atas saat scroll */
     top: 0;
-    width: 100%;
-    z-index: 1000;
-    /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */ /* Anda mungkin ingin menghapus atau menyesuaikan shadow ini */
-    transition: background-color 0.3s ease-in-out; /* Opsional: untuk transisi jika Anda ingin mengubahnya saat scroll */
+    left: 0; /* Pastikan menempel dari kiri jika sticky */
+    width: 100%; /* Header mengambil lebar penuh viewport */
+    z-index: 1000; /* Pastikan di atas konten lain */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Sedikit shadow jika diinginkan */
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
 }
 
 .main-header nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-}
-
-.main-header .logo {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #FFFFFF;
+    /* UBAH BAGIAN INI:
+       Alih-alih 'space-between', gunakan 'flex-start' untuk merapatkan semua item ke kiri.
+       Atau, Anda bisa menghapus 'justify-content' jika tidak ada item lain yang perlu diatur di sisi kanan NAV ini. */
+    justify-content: flex-start; /* Item akan mulai dari kiri */
+    align-items: center; /* Tetap tengahkan item secara vertikal */
+    max-width: 1100px;   /* Lebar konten utama website Anda */
+    margin: 0 auto;      /* Menengahkan nav di dalam .main-header */
+    padding: 0 20px;     /* Padding internal untuk konten nav agar tidak terlalu menempel ke tepi .main-header jika .main-header tidak punya padding sendiri */
+    box-sizing: border-box;
 }
 
 .main-header nav ul {
@@ -129,6 +128,88 @@ img {
     color: #E6E6FA; /* Lavender, atau warna lain yang kontras */
 }
 
+.nav-items-right {
+    display: flex; /* Membuat .main-nav-links dan .header-actions sejajar */
+    align-items: center;
+}
+
+.main-header .main-nav-links {
+    list-style: none;
+    display: flex; /* Agar item li sejajar horizontal */
+    padding: 0;
+    margin: 0; /* Hapus margin default dari ul */
+}
+
+.main-header .main-nav-links li {
+    /* Ubah margin-left menjadi margin-right untuk jarak antar link */
+    margin-right: 25px; /* Jarak antar item link navigasi. Sesuaikan. */
+    /* margin-left: 0; */ /* Hapus margin kiri jika ada dari sebelumnya */
+}
+
+.main-header .main-nav-links li:last-child {
+    margin-right: 0;
+}
+
+.main-header .main-nav-links li a {
+    text-decoration: none;
+    /* color: #301934; */ /* Warna link, sesuaikan dengan background header */
+    /* font-weight: 600; */ /* ... gaya link Anda yang lain ... */
+    /* Contoh jika header putih dan teks ungu tua */
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.main-header .main-nav-links li a:hover {
+    color: #9370DB;
+}
+
+
+.header-actions {
+    position: absolute; /* Diposisikan relatif terhadap .main-header */
+    top: 50%; /* Pusatkan secara vertikal di tengah tinggi header */
+    transform: translateY(-50%); /* Teknik centering vertikal yang presisi */
+    right: 30px; /* Jarak dari tepi kanan viewport. SESUAIKAN NILAI INI! */
+                 /* Anda bisa gunakan % juga, misal right: 3%; */
+    z-index: 1001; /* Pastikan di atas elemen lain di header jika ada tumpang tindih */
+    display: flex; /* Untuk mengatur tombol jika ada lebih dari satu */
+    align-items: center;
+}
+
+/* Gaya Umum untuk Tombol di Header */
+.btn-header {
+    padding: 8px 18px;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-left: 12px; /* Jarak antar tombol */
+    font-weight: 600;
+    font-size: 0.9em;
+    line-height: 1.4;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-block; /* Pastikan display block atau inline-block */
+}
+
+/* Tombol Login (Contoh: Gaya outline/transparan) */
+/* Asumsi header Anda gelap atau transparan, sehingga teks tombol terang */
+.btn-header.btn-login {
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF;
+    background-color: transparent;
+}
+.btn-header.btn-login:hover {
+    background-color: #FFFFFF;
+    color: #301934; /* Teks ungu tua */
+}
+
+.btn-header.btn-join {
+    background-color: #9370DB; /* Ungu muda aksen */
+    color: #FFFFFF;
+    border: 2px solid #9370DB;
+}
+.btn-header.btn-join:hover {
+    background-color: #7A5FB0; /* Ungu aksen lebih gelap */
+    border-color: #7A5FB0;
+}
 
 /* Hero Section */
 .hero-section {
@@ -149,6 +230,40 @@ img {
     padding-top: var(--header-height); /* Dorong konten di dalamnya ke bawah, agar tidak tertutup header */
                                         /* flex align-items akan bekerja pada area setelah padding ini */
     /* box-sizing: border-box; sudah diatur global via '*' */
+}
+
+.hero-section::after {
+    content: ''; /* Wajib ada untuk elemen semu */
+    position: absolute;
+    bottom: 0; /* Letakkan di bagian paling bawah hero-section */
+    left: 0;
+    width: 100%; /* Lebar penuh */
+    height: 1610px; /* TINGGI AREA GRADASI - Sesuaikan nilai ini (misal: 100px, 200px, atau 15vh) */
+                   /* Semakin besar nilainya, semakin landai/panjang gradasinya */
+
+    /* KUNCI: Buat gradasi linear dari transparan ke warna latar section berikutnya */
+    /* GANTI #F8F8FF dengan warna latar belakang aktual dari .profile-section Anda */
+        background: linear-gradient(to bottom,
+        rgba(248, 248, 255, 0) 80%,    /* Mulai transparan di 0% (atas) */
+        rgba(248, 248, 255, 0) 90%,   /* Tetap transparan sampai 40% dari atas */
+        #F0E8FF 100%                 /* Lalu memudar ke solid #F8F8FF di 100% (bawah) */
+    );
+
+    /* Penjelasan:
+       - rgba(248, 248, 255, 0): Warna awal gradasi (transparan). RGB-nya bisa disamakan dengan warna akhir
+         agar transisi lebih halus jika ada sisa warna dari overlay gelap hero.
+       - #F8F8FF: Warna akhir gradasi (harus sama dengan background .profile-section).
+                 Jika .profile-section Anda putih (#FFFFFF), ganti menjadi:
+                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #FFFFFF);
+    */
+
+    z-index: 2; /* Atur z-index agar gradasi ini muncul di atas video/gambar background hero,
+                   tetapi di bawah konten utama hero (.hero-content).
+                   Jika Anda memiliki .hero-overlay (untuk menggelapkan video) dengan z-index: 1 juga,
+                   gradasi ini akan berinteraksi dengannya. Transparansi di awal gradasi
+                   akan membuat overlay gelap masih terlihat dan kemudian memudar ke warna terang. */
+
+    pointer-events: none; /* Agar gradasi tidak mengganggu interaksi mouse dengan elemen di bawahnya */
 }
 
 .hero-overlay {
@@ -269,6 +384,7 @@ img {
     padding-top: 60px;    /* Padding vertikal atas untuk section */
     padding-bottom: 60px; /* Tambahkan padding horizontal untuk ruang di layar kecil */
     background-color: #F0E8FF; /* Warna latar belakang ungu muda yang lembut, sesuaikan */
+    position: relative;
 }
 
 .profile-section h2 {
