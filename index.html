@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<lang="id">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>月に足跡を残した少女達は一体何を見たのか...</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"> <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
-
-<script src="script.js"></script>
 
 <div id="memberDetailModalOverlay" class="modal-overlay"> <div class="modal-container"> <button class="modal-close-button" aria-label="Tutup Pop-up">&times;</button>
         <div id="modalDynamicContent">
@@ -114,36 +112,147 @@
     <section id="news" class="news-section">
         <div class="container">
             <h2>ニュース</h2>
-            <div class="news-grid">
-                <article class="news-item animate-slideInLeft-scroll">
-                    <img src="assets/news1.jpeg" alt="Berita 1">
-                    <div class="news-content">
-                        <h3>定期観測#7開催決定</h3>
-                        <span class="news-date">2025年4月24日</span>
-                        <p></p>
-                        <a href="#" class="read-more">More</a>
-                    </div>
-                </article>
-                <article class="news-item animate-slideInRight-scroll">
-                    <img src="assets/news2.jpeg" alt="Berita 2">
-                    <div class="news-content">
-                        <h3>羽﨑ほの生誕祭2025 ~La magie~ </h3>
-                        <span class="news-date">2025年4月20日</span>
-                        <p></p>
-                        <a href="#" class="read-more">More</a>
-                    </div>
-                </article>
-                <article class="news-item animate-slideInRight-scroll">
-                    <img src="assets/news3.jpeg" alt="Berita 3">
-                    <div class="news-content">
-                        <h3>葵音琴生誕祭2024</h3>
-                        <span class="news-date">2024年12月14日</span>
-                        <p></p>
-                        <a href="#" class="read-more">More</a>
-                    </div>
-                </article>
             </div>
-        </div>
+
+            <div class="swiper news-swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="detail-berita1.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news1.jpeg" alt="Judul Berita 1">
+                            <div class="news-card-content">
+                                <h3>🌕定期観測#7開催決定‼️🌕</h3>
+                                <span class="news-date">2025年4月24日</span>
+                                <p>
+                                ⚡️4月からも毎月開催します⚡️
+                                そして！
+                                今回から開場を30分遅くしてより来場しやすくなりました👍</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita2.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news2.jpeg" alt="Judul Berita 2">
+                            <div class="news-card-content">
+                                <h3>🪄︎︎羽﨑ほの生誕祭2025 ~La magie~ 🎀</h3>
+                                <span class="news-date">2025年4月20日</span>
+                                <p>2025年4月20日(日)
+                                羽﨑ほの生誕祭2025 ~La magie~
+                                📍恵比寿CreAto
+                                事前物販：16:00~17:00
+                                OPEN 18:00 / START 18:30
+                                終演後特典会：20:00~21:30</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita3.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news3.jpeg" alt="Judul Berita 3">
+                            <div class="news-card-content">
+                                <h3>🐈葵音琴生誕祭2024🐈</h3>
+                                <span class="news-date">2024年12月14日</span>
+                                <p>2024年12月14日(土)
+                                葵音琴生誕祭2024 アルタキースタジオ
+                                OPEN：12:00／START：12:30
+                                終演後特典会</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita4.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news4.jpeg" alt="Judul Berita 4">
+                            <div class="news-card-content">
+                                <h3>🌙ツキアト定期観測#9🌙</h3>
+                                <span class="news-date">05 Juni 2025</span>
+                                <p>定期観測#9＠GOTANDA G4 2025年6月13日(金) 🕖OPEN 19:00 / START 19:30 📸終演後物販</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita5.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news5.jpeg" alt="Judul Berita 5">
+                            <div class="news-card-content">
+                                <h3>🔥イベント情報🔥</h3>
+                                <span class="news-date">06 Juni 2025</span>
+                                <p>2025年6月12日（木）
+                                【三拍子＆白岡今日花の イデアのたしなみ】
+                                ⏰受付19:00 / 開場19:20 / 開演19:30
+                                📍WALLOP 3F STUDIO（東京都墨田区業平4-16-6）</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita6.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news6.jpeg" alt="Judul Berita 6">
+                            <div class="news-card-content">
+                                <h3>🌙New Single サブスク解禁🌙</h3>
+                                <span class="news-date">07 Juni 2025</span>
+                                <p>ーー5月2日0時解禁ーー
+
+                                    約束の場所
+                                    https://linkco.re/3GQ1dS12
+
+                                    ＜Credit＞
+                                    作詞・作曲：Sean Oshima 
+                                    @sean_oshima_jp
+
+                                    
+                                    振付：mitsui mayu
+                                    @mitsui_mayu
+
+                                    
+                                    衣裳：平松正美
+                                    @hiramatsu033
+                                    
+                                    
+                                    Photo：下山春香
+                                    @photo_hk0215
+                                    
+                                    
+                                    Jacket Design：早﨑優奈
+                                    @hayasaki_yuna</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="detail-berita7.html" class="news-card-link">
+                        <div class="news-card">
+                            <img src="assets/news7.jpeg" alt="Judul Berita 7">
+                            <div class="news-card-content">
+                                <h3>🌙嬉しいお知らせ🌙</h3>
+                                <span class="news-date">08 Juni 2025</span>
+                                <p>@JAM
+                                出演経験のあるアイドルで結成されたガチなeSportsチーム【
+                                @JAM
+                                eSportsチーム〜じゃみすぽ〜】に #ツキアト リーダーの #早﨑優奈 が選出されました⚡️
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev carousel-arrow news-arrow-prev"></div>
+            <div class="swiper-button-next carousel-arrow news-arrow-next"></div>
+
+            </div>
     </section>
 
     <section id="discography" class="discography-section">
@@ -187,6 +296,62 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var newsSwiper = new Swiper('.news-swiper-container', {
+                // Opsi konfigurasi Swiper
+                slidesPerView: 3, // Jumlah slide terlihat untuk mobile
+                spaceBetween: 10, // Jarak antar slide (kartu)
+                grabCursor: true,   // Mengubah kursor menjadi tangan saat bisa di-grab
+                loop: true,         // KUNCI: Membuat carousel berulang (looping)
+                                    // Jika ada 7 kartu, setelah ke-7 akan kembali ke-1
+
+                // Opsi untuk autoplay (bergerak berjalan ke kiri)
+                autoplay: {
+                    delay: 4000, // Jeda waktu antar slide dalam milidetik (4 detik)
+                    disableOnInteraction: false, // Autoplay tidak berhenti setelah interaksi user (opsional)
+                    pauseOnMouseEnter: true, // Autoplay berhenti saat mouse hover di atas slider
+                },
+
+                // Opsi untuk tombol navigasi panah
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // Opsi untuk pagination (jika Anda menambahkannya di HTML)
+                // pagination: {
+                //   el: '.swiper-pagination',
+                //   clickable: true,
+                // },
+
+                // Responsif: Mengubah slidesPerView berdasarkan lebar layar
+                breakpoints: {
+                    // Saat lebar layar >= 640px
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    // Saat lebar layar >= 768px (tablet)
+                    768: {
+                        slidesPerView: 2.5, // Menampilkan 2 kartu penuh dan sebagian kartu ke-3
+                        spaceBetween: 25,
+                    },
+                    // Saat lebar layar >= 1024px (desktop)
+                    1024: {
+                        slidesPerView: 3, // Menampilkan 3 kartu penuh
+                        spaceBetween: 30,
+                    },
+                    // Saat lebar layar >= 1200px (desktop besar)
+                     1200: {
+                        slidesPerView: 3.5, // Atau 4 jika Anda ingin lebih banyak terlihat
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
 
         // Script sederhana untuk tahun di footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -215,7 +380,7 @@
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.main-header');
             if (window.scrollY > 50) { // Angka 50 bisa disesuaikan (jarak scroll sebelum header berubah)
-                header.style.backgroundColor = 'rgba(48, 25, 52, 0.9)'; // Ungu tua semi-transparan
+                header.style.backgroundColor = 'rgba(117, 86, 225, 0.9)'; // Ungu tua semi-transparan
                 // header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)'; // Munculkan lagi shadow jika perlu
             } else {
                 header.style.backgroundColor = 'transparent';
@@ -374,5 +539,8 @@
 </div>
 
     </div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="script.js"></script>    
 </body>
 </html>
