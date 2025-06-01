@@ -6,57 +6,64 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalDynamicContent = document.getElementById('modalDynamicContent');
     const closeModalButton = modalOverlay.querySelector('.modal-close-button');
 
-    // Pastikan semua elemen modal ada
     if (!modalOverlay || !modalDynamicContent || !closeModalButton) {
         console.error("Elemen modal tidak ditemukan. Pop-up tidak akan berfungsi.");
         return;
     }
 
     // Fungsi untuk membuka modal
-    function openModal(contentUrl) {
-        // Tampilkan loading (opsional)
-        modalDynamicContent.innerHTML = '<p style="text-align:center; padding:20px;">Memuat detail...</p>';
-        modalOverlay.classList.add('active'); // Tampilkan overlay dan modal
+    
+    function openModalWithContent(targetModalId) {
+        const contentSourceDiv = document.getElementById(targetModalId);
 
-        // Ambil konten dari file HTML terpisah
-        fetch(contentUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Gagal memuat konten: ' + response.statusText);
-                }
-                return response.text(); // Dapatkan HTML sebagai teks
-            })
-            .then(htmlFragment => {
-                modalDynamicContent.innerHTML = htmlFragment; // Masukkan HTML ke dalam modal
-            })
-            .catch(error => {
-                console.error('Error saat mengambil detail member:', error);
-                modalDynamicContent.innerHTML = '<p style="text-align:center; padding:20px; color:red;">Maaf, tidak bisa memuat detail saat ini.</p>';
-            });
+        if (contentSourceDiv) {
+            modalDynamicContent.innerHTML = contentSourceDiv.innerHTML;
+        } else {
+            console.error('Konten detail untuk ID: ' + targetModalId + ' tidak ditemukan.');
+            modalDynamicContent.innerHTML = '<p style="text-align:center;padding:20px;color:red;">Konten tidak ditemukan.</p>';
+        }
+
+        // Langkah 1: Ubah display agar elemen siap di-render (meskipun masih opacity 0)
+        modalOverlay.style.display = 'flex';
+
+        // Langkah 2: Gunakan requestAnimationFrame atau setTimeout(0) untuk memastikan
+        // browser telah memproses perubahan display sebelum kita menambahkan kelas .active
+        // untuk memicu transisi opacity dan transform.
+        requestAnimationFrame(() => {
+            // Tambahkan sedikit timeout lagi jika perlu, tapi rAF biasanya cukup
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+            }, 10); // Delay sangat kecil (10ms)
+        });
     }
 
-    // Fungsi untuk menutup modal
     function closeModal() {
-        modalOverlay.classList.remove('active');
-        // Kosongkan konten setelah ditutup agar tidak tampil saat dibuka lagi (jika user klik kartu lain)
-        // Tambahkan sedikit delay agar tidak terlihat aneh saat animasi fade-out
-        setTimeout(() => {
-            modalDynamicContent.innerHTML = '';
-        }, 300); // Sesuaikan dengan durasi transisi opacity modal-overlay
+        modalOverlay.classList.remove('active'); // Ini akan memicu transisi kembali ke opacity 0 dan transform awal
+
+        // Tambahkan event listener untuk 'transitionend' pada overlay.
+        // Ini akan dijalankan setelah transisi opacity pada .modal-overlay selesai.
+        function handleTransitionEnd(event) {
+            // Pastikan kita hanya bereaksi pada transisi opacity dari .modal-overlay
+            // dan modal memang sudah tidak aktif lagi (untuk menghindari trigger ganda)
+            if (event.target === modalOverlay && event.propertyName === 'opacity' && !modalOverlay.classList.contains('active')) {
+                modalOverlay.style.display = 'none'; // Baru sembunyikan elemen sepenuhnya
+                modalDynamicContent.innerHTML = '';    // Kosongkan konten
+                modalOverlay.removeEventListener('transitionend', handleTransitionEnd); // Hapus listener agar tidak berjalan lagi
+            }
+        }
+        modalOverlay.addEventListener('transitionend', handleTransitionEnd);
     }
 
     // Tambahkan event listener ke setiap kartu profil
     profileCardLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault(); // Mencegah navigasi ke href link (karena kita tampilkan pop-up)
+            event.preventDefault(); // Mencegah navigasi ke href="#"
 
-            const contentFile = this.dataset.detailSrc; // Ambil path file dari atribut data-detail-src
-            if (contentFile) {
-                openModal(contentFile);
+            const targetModalId = this.dataset.targetModal; // Ambil ID dari atribut data-target-modal
+            if (targetModalId) {
+                openModalWithContent(targetModalId);
             } else {
-                console.warn("Atribut data-detail-src tidak ditemukan pada kartu ini. Menggunakan href sebagai fallback...");
-                // Fallback: jika tidak ada data-detail-src, navigasi ke href (halaman detail penuh)
-                window.location.href = this.href;
+                console.warn("Atribut data-target-modal tidak ditemukan pada kartu ini.");
             }
         });
     });
@@ -66,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listener untuk menutup modal dengan klik di luar area modal (pada overlay)
     modalOverlay.addEventListener('click', function(event) {
-        // Pastikan yang diklik adalah overlay, bukan konten di dalamnya
         if (event.target === modalOverlay) {
             closeModal();
         }

@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>月に足跡を残した少女達は一体何を見たのか...</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <script src="script.js"></script>
 
+<div id="memberDetailModalOverlay" class="modal-overlay"> <div class="modal-container"> <button class="modal-close-button" aria-label="Tutup Pop-up">&times;</button>
+        <div id="modalDynamicContent">
+            </div>
+    </div>
+</div>
+
 <body>
     <header class="main-header">
-        <nav>
+        <nav> 
             <ul class="main-nav-links">
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#news">NEWS</a></li>
@@ -23,8 +29,8 @@
         </nav>
 
         <div class="header-actions"> 
-            <a href="/login.html" class="btn btn-header btn-login">Login</a>
-            <a href="/join.html" class="btn btn-header btn-join">Join</a>
+            <a href="" class="btn btn-header btn-login">Login</a>
+            <a  class="btn btn-header btn-join">Join</a>
         </div>
     </header>
 
@@ -47,14 +53,14 @@
         <h2>プロフィールメンバー</h2>
         <div class="profile-grid">
 
-            <a href="member1-detail.html" class="profile-card-link animate-fadeInUp-scroll"> <div class="profile-card">
+            <a href="#" data-target-modal="detail-member1" class="profile-card-link animate-fadeInUp-scroll"> <div class="profile-card">
                     <img src="assets/yuuna.jpeg" alt="Nama Member 1"> <div class="member-name-plate"> <h3></h3> </div>
                     <div class="profile-hover-info"> <h4>苗加結菜</h4>
                     </div>
                 </div>
             </a>
 
-            <a href="member2-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-1">
+            <a href="#" data-target-modal="detail-member2" class="profile-card-link animate-fadeInUp-scroll delay-1">
                 <div class="profile-card">
                     <img src="assets/rena.jpeg" alt="Nama Member 2">
                     <div class="member-name-plate">
@@ -66,7 +72,7 @@
                 </div>
             </a>
 
-            <a href="member3-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-2">
+            <a href="#" data-target-modal="detail-member3" class="profile-card-link animate-fadeInUp-scroll delay-2">
                 <div class="profile-card">
                     <img src="assets/hayasaki.jpeg" alt="Nama Member 3">
                     <div class="member-name-plate">
@@ -78,7 +84,7 @@
                 </div>
             </a>
 
-            <a href="member4-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-3"> <div class="profile-card">
+            <a href="#" data-target-modal="detail-member4" class="profile-card-link animate-fadeInUp-scroll delay-3"> <div class="profile-card">
                     <img src="assets/aoi.jpeg" alt="Nama Member 4">
                     <div class="member-name-plate">
                         <h3></h3>
@@ -89,7 +95,7 @@
                 </div>
             </a>
 
-            <a href="member5-detail.html" class="profile-card-link animate-fadeInUp-scroll delay-4">
+            <a href="#" data-target-modal="detail-member5" class="profile-card-link animate-fadeInUp-scroll delay-4">
                 <div class="profile-card">
                     <img src="assets/hono.jpeg" alt="Nama Member 5">
                     <div class="member-name-plate">
@@ -127,6 +133,41 @@
                         <a href="#" class="read-more">More</a>
                     </div>
                 </article>
+                <article class="news-item animate-slideInRight-scroll">
+                    <img src="assets/news3.jpeg" alt="Berita 3">
+                    <div class="news-content">
+                        <h3>葵音琴生誕祭2024</h3>
+                        <span class="news-date">2024年12月14日</span>
+                        <p></p>
+                        <a href="#" class="read-more">More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="discography" class="discography-section">
+        <div class="container">
+            <h2>ディスコグラフィー</h2>
+            <div class="discography-grid">
+                <article class="discography-item animate-fadeInUp-scroll">
+                    <img src="assets/disc1.jpeg" alt="Album 1">
+                    <div class="discography-content">
+                        <h3>Album Name</h3>
+                        <span class="release-date">2025年3月15日</span>
+                        <p></p>
+                        <a href="#" class="listen-now">Listen Now</a>
+                    </div>
+                </article>
+                <article class="discography-item animate-fadeInUp-scroll delay-1">
+                    <img src="assets/disc2.jpeg" alt="Album 2">
+                    <div class="discography-content">
+                        <h3>Album Name</h3>
+                        <span class="release-date">2025年1月10日</span>
+                        <p></p>
+                        <a href="#" class="listen-now">Listen Now</a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -135,9 +176,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-social">
-                    <a href="#" aria-label="Link ke Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
-                    <a href="#" aria-label="Link ke Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
-                    <a href="#" aria-label="Link ke YouTube"><img src="images/icon-youtube.svg" alt="YouTube"></a>
+                    <a href="#" aria-label="Link ke Twitter"><img src="assets/twitter.svg" alt="Twitter"></a>
+                    <a href="#" aria-label="Link ke Instagram"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Link ke YouTube"><img src="assets/youtube.svg" alt="YouTube"></a>
                 </div>
                 <p>&copy; <span id="year"></span> ウェブサイト作成の学習のみを目的としています。利益を得るものではありません。</p>
                 <p><a href="#">Contact</a> | <a href="#">Privacy Policy</a></p>
@@ -215,5 +256,123 @@
 
         });
     </script>
+
+        <div id="memberDetailModalOverlay" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close-button" aria-label="Tutup Pop-up">&times;</button>
+            <div id="modalDynamicContent">
+                </div>
+        </div>
+    </div>
+
+    <div class="hidden-member-details">
+    <div id="detail-member1" class="member-detail-content-source">
+        <div class="member-detail-popup-content"> <img src="assets/yuuna_2.jpeg" alt="Foto Detail Member 1" class="member-detail-image-left"> <div class="member-detail-text-right"> <div class="member-title-role"> <span>✨ 癒し系担当 ✨</span></div>
+            <h2>苗加結菜 (なえかゆうな)</h2> <div class="member-attributes">
+                <p><strong>生年月日 :</strong> ２００１年９月５日</p>
+                <p><strong>出身地 :</strong> 北海道</p>
+                <p><strong>血液型 :</strong> A型</p>
+                <p><strong>特技 :</strong> ゆるーい似顔絵・コスメ集め</p>
+            </div>
+
+            <p class="member-bio">アイドル以外にもモデルやドラマ出演もこなしマルチに活動中！</p>
+
+            <div class="member-social-links">
+                <a href="https://x.com/naeka_yuuna" target="_blank" class="social-icon"><img src="assets/twitter.svg" alt="X"></a>
+                <a href="https://www.instagram.com/naeka_yuuna/" target="_blank" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@naeka_yuuna" target="_blank" class="social-icon"><img src="assets/tik-tok.svg" alt="TikTok"></a>
+                <a href="https://page.line.me/508ftskz?oat_content=url&openQrModal=true" target="_blank" class="social-icon"><img src="assets/line.svg" alt="LINE"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="detail-member2" class="member-detail-content-source">
+        <div class="member-detail-popup-content"> <img src="assets/rena_2.jpeg" alt="Foto Detail Member 1" class="member-detail-image-left"> <div class="member-detail-text-right"> <div class="member-title-role"> <span>✨ クール担当 ✨</span></div>
+            <h2>美南れな (みなみれな)</h2> <div class="member-attributes">
+                <p><strong>生年月日 :</strong> ２００３年９月９日</p>
+                <p><strong>出身地 :</strong> 埼玉県</p>
+                <p><strong>血液型 :</strong> A型</p>
+                <p><strong>特技 :</strong> ダンス・ネイル・卓球</p>
+            </div>
+
+            <p class="member-bio">小柄ながらダイナミックなダンスで魅了するパフォーマンスは一見の価値あり！</p>
+
+            <div class="member-social-links">
+                <a href="https://x.com/minami__rena" target="_blank" class="social-icon"><img src="assets/twitter.svg" alt="X"></a>
+                <a href="https://www.instagram.com/tsukiato_rena/" target="_blank" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@tsukiato_rena" target="_blank" class="social-icon"><img src="assets/tik-tok.svg" alt="TikTok"></a>
+                <a href="https://page.line.me/266uxkap?oat_content=url&openQrModal=true" target="_blank" class="social-icon"><img src="assets/line.svg" alt="LINE"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="detail-member3" class="member-detail-content-source">
+        <div class="member-detail-popup-content"> <img src="assets/hayasaki_2.jpeg" alt="Foto Detail Member 1" class="member-detail-image-left"> <div class="member-detail-text-right"> <div class="member-title-role"> <span>✨ リーダー ✨</span></div>
+            <h2>早﨑優奈 (はやさきゆな)</h2> <div class="member-attributes">
+                <p><strong>生年月日 :</strong> ２０００年８月２１日</p>
+                <p><strong>出身地 :</strong> 東京都</p>
+                <p><strong>血液型 :</strong> AB型</p>
+                <p><strong>特技 :</strong> ダンス・映像制作/編集・ナレーション・英会話</p>
+                <p><strong>趣味 :</strong> ゲーム・ディズニー・デザイン・いろんな声が出ます</p>
+            </div>
+
+            <p class="member-bio">ツキアトの公式YouTubeチャンネルの企画撮影編集も担当するクリエイターでもある頼れるリーダー！</p>
+
+            <div class="member-social-links">
+                <a href="https://x.com/hayasaki_yuna" target="_blank" class="social-icon"><img src="assets/twitter.svg" alt="X"></a>
+                <a href="https://www.instagram.com/hayasaki_yuna/" target="_blank" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@hayasaki_yuna" target="_blank" class="social-icon"><img src="assets/tik-tok.svg" alt="TikTok"></a>
+                <a href="https://page.line.me/080cwhex?oat_content=url&openQrModal=true" target="_blank" class="social-icon"><img src="assets/line.svg" alt="LINE"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="detail-member4" class="member-detail-content-source">
+        <div class="member-detail-popup-content"> <img src="assets/aoi_2.jpeg" alt="Foto Detail Member 1" class="member-detail-image-left"> <div class="member-detail-text-right"> <div class="member-title-role"> <span>✨ 絶対的歌姫 ✨</span></div>
+            <h2><strong>葵音琴</strong> (あおいねこと)</h2> <div class="member-attributes">
+                <p><strong>生年月日 :</strong> ２００２年１２月２２日</p>
+                <p><strong>出身地 :</strong> 埼玉県</p>
+                <p><strong>血液型 :</strong> B型</p>
+                <p><strong>特技 :</strong> 歌</p>
+            </div>
+
+            <p class="member-bio">グループの絶対的歌姫で唯一無二の世界観を持ちながら、アニメ好きのヲタクな一面も併せ持つ。</p>
+
+            <div class="member-social-links">
+                <a href="https://x.com/tsukiato_neko" target="_blank" class="social-icon"><img src="assets/twitter.svg" alt="X"></a>
+                <a href="https://www.instagram.com/tsukiato_neko/" target="_blank" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@aoinekoto1222" target="_blank" class="social-icon"><img src="assets/tik-tok.svg" alt="TikTok"></a>
+                <a href="https://page.line.me/331ehvwx?oat_content=url&openQrModal=true" target="_blank" class="social-icon"><img src="assets/line.svg" alt="LINE"></a>
+                <a href="https://www.youtube.com/@AoiNekoto_Official" target="_blank" class="social-icon"><img src="assets/youtube.svg" alt="YouTube"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="detail-member5" class="member-detail-content-source">
+        <div class="member-detail-popup-content"> <img src="assets/hono_2.jpeg" alt="Foto Detail Member 1" class="member-detail-image-left"> <div class="member-detail-text-right"> <div class="member-title-role"> <span>✨ ツキアト１のギャップの持ち主 ✨</span></div>
+            <h2><strong>羽﨑ほの</strong> (はざきほの)</h2> <div class="member-attributes">
+                <p><strong>生年月日 :</strong> ２００２年２月３日</p>
+                <p><strong>出身地 :</strong> 千葉県</p>
+                <p><strong>血液型 :</strong> A型</p>
+                <p><strong>特技 :</strong> バドミントン・クラシックバレエ（体が柔らかい）</p>
+            </div>
+
+            <p class="member-bio">音域の広さで魅了する歌声は要CHECK！自他共認めるアイドルヲタク。</p>
+
+            <div class="member-social-links">
+                <a href="https://x.com/hazaki_hono" target="_blank" class="social-icon"><img src="assets/twitter.svg" alt="X"></a>
+                <a href="https://www.instagram.com/hazaki_hono/" target="_blank" class="social-icon"><img src="assets/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@hazaki_hono" target="_blank" class="social-icon"><img src="assets/tik-tok.svg" alt="TikTok"></a>
+                <a href="https://page.line.me/189xvfeg?oat_content=url&openQrModal=true" target="_blank" class="social-icon"><img src="assets/line.svg" alt="LINE"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
 </body>
 </html>
