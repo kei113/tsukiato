@@ -204,11 +204,11 @@ img {
 .btn-header.btn-join {
     background-color: #9370DB; /* Ungu muda aksen */
     color: #FFFFFF;
-    border: 2px solid #9370DB;
+    border: 2px solid #ffffff;
 }
 .btn-header.btn-join:hover {
-    background-color: #7A5FB0; /* Ungu aksen lebih gelap */
-    border-color: #7A5FB0;
+    background-color: #7a38ff; /* Ungu aksen lebih gelap */
+    border-color: #7a38ff;
     transform: scale(1.11); /* Sedikit efek zoom saat hover */
 }
 
@@ -236,6 +236,10 @@ img {
     margin-top: calc(-1 * var(--header-height)); /* Tarik section ini ke atas sejauh tinggi header */
     padding-top: var(--header-height); /* Dorong konten di dalamnya ke bawah, agar tidak tertutup header */
                                         /* flex align-items akan bekerja pada area setelah padding ini */
+    -webkit-user-select: none; /* Untuk browser Safari dan Chrome lama */
+    -moz-user-select: none;    /* Untuk Firefox */
+    -ms-user-select: none;     /* Untuk Internet Explorer/Edge lama */
+    user-select: none;
     /* box-sizing: border-box; sudah diatur global via '*' */
 }
 
@@ -305,6 +309,10 @@ img {
     display: block; /* Membantu jika ada masalah dengan spasi di sekitar gambar */
     margin-left: auto; /* Untuk menengahkan gambar jika parentnya (h1) lebih lebar */
     margin-right: auto;/* Untuk menengahkan gambar jika parentnya (h1) lebih lebar */
+    -webkit-user-select: none; /* Untuk browser Safari dan Chrome lama */
+    -moz-user-select: none;    /* Untuk Firefox */
+    -ms-user-select: none;     /* Untuk Internet Explorer/Edge lama */
+    user-select: none;
 }
 
 .hero-content p {
@@ -431,6 +439,10 @@ img {
             background-color: #301934; /* Warna ungu tua jika gambar gagal dimuat */
             overflow: hidden;
             transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+            -webkit-user-select: none; /* Untuk browser Safari dan Chrome lama */
+            -moz-user-select: none;    /* Untuk Firefox */
+            -ms-user-select: none;     /* Untuk Internet Explorer/Edge lama */
+            user-select: none;
 }
 
 
@@ -588,7 +600,7 @@ img {
 
 .member-detail-popup-content .member-detail-image-left {
     flex-shrink: 0; /* Mencegah gambar menyusut jika teks terlalu panjang */
-    width: 400px;     /* Lebar gambar, contoh 35% dari total lebar .member-detail-popup-content */
+    width: 440px;     /* Lebar gambar, contoh 35% dari total lebar .member-detail-popup-content */
     max-width: 820px;/* Lebar absolut maksimum untuk gambar, sesuaikan */
     height: auto;     /* Menjaga rasio aspek gambar */
     object-fit: cover;/* Membuat gambar mengisi area dengan baik, mungkin ter-crop */
@@ -676,7 +688,7 @@ img {
 }
 
 .member-detail-text-right .member-social-links .social-icon img:hover {
-    opacity: 1; /* Ikon menjadi solid saat di-hover */
+    opacity: 1; /* Opasitas penuh saat hover */
     transform: scale(1.15); /* Sedikit efek membesar saat di-hover */
 }
 
@@ -813,6 +825,200 @@ img {
     margin-bottom: 40px;
 }
 
+.news-swiper-container {
+    width: 1500px;
+    height: 360px; /* Atur tinggi tetap untuk carousel */
+    margin: 0 auto;
+    padding: 0 45px; /* Padding jika panah di dalam */
+    position: relative; /* Diperlukan jika panah diposisikan absolut relatif terhadap ini */
+    box-sizing: border-box;
+    padding-top: 45px;
+}
+
+.swiper-slide {
+    width: 100%; /* Lebar tetap untuk setiap slide */
+    flex-shrink: 0;
+    display: flex;
+    align-items: stretch; /* Membuat semua slide (dan kartu di dalamnya) memiliki tinggi yang sama */
+    height: auto; /* Biarkan Swiper mengatur tinggi */
+    box-sizing:content-box;
+}
+
+a.news-card-link {
+    display: block; /* Agar mengambil ruang dan bisa diberi dimensi */
+    width: 100%;
+    height: 100%; /* Mengisi tinggi .swiper-slide */
+    text-decoration: none;
+    color: inherit; /* Mewarisi warna teks */
+    border-radius: 10px; /* Sudut melengkung untuk efek kartu */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden; /* Penting untuk memotong konten saat animasi scale */
+    background-color: #ffffff; /* Background untuk kartu, pindah dari .news-card */
+
+    /* Transisi untuk animasi hover dan active */
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    position: relative; /* Agar z-index berfungsi saat hover */
+    z-index: 1;
+}
+
+a.news-card-link:hover {
+    transform: scale(1.03); /* Membesar saat hover */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 15; /* Membawa kartu ke depan saat hover */
+}
+
+a.news-card-link:active {
+    transform: scale(0.98); /* Sedikit mengecil saat diklik (active) */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.news-card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Menyusun judul, tanggal, paragraf secara vertikal */
+    flex-grow: 1; /* Membuat area konten ini mengisi sisa ruang di kartu */
+    overflow: hidden; /* Untuk line-clamp jika teks panjang */
+}
+
+.news-card-content h3 { /* Judul Berita */
+    font-size: 1.3em; /* Sesuaikan ukuran */
+    color: #301934; /* Ungu Tua */
+    margin: 0 0 5px 0; /* Margin bawah ke tanggal */
+    line-height: 1.35; /* Sesuaikan untuk spasi antar baris judul */
+    /* Pembatasan baris untuk judul (misalnya, maksimal 2 baris) */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Jumlah baris maksimal */
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Pastikan ada ruang minimal untuk judul jika pendek */
+    min-height: calc(1.3em * 1.35); /* Ruang untuk setidaknya 1 baris */
+}
+
+.news-card-content .news-date { /* Tanggal Berita */
+    font-size: 0.8em;
+    color: #777777; /* Warna abu-abu untuk tanggal */
+    margin-bottom: 10px; /* Jarak ke paragraf ringkasan */
+    display: block; /* Agar mengambil baris sendiri */
+}
+
+.news-card-content p { /* Ringkasan Berita */
+    font-size: 0.9em;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 0; /* Hapus margin bawah karena ini elemen terakhir dalam flex-grow */
+    flex-grow: 1; /* Membuat paragraf mengisi sisa ruang vertikal yang ada */
+    /* Pembatasan baris untuk ringkasan (sudah ada sebelumnya) */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Jumlah baris maksimal */
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Gaya untuk Kartu Berita Anda (sama seperti sebelumnya, atau sesuaikan) */
+.news-card {
+    height: 400px; /* Membuat kartu mengisi tinggi .swiper-slide jika slide-nya flex */
+    width: 100%; /* Membuat kartu mengisi lebar .swiper-slide */
+    display: flex;
+    flex-direction: column;
+
+    -webkit-user-select: none; /* Untuk browser Safari dan Chrome lama */
+    -moz-user-select: none;    /* Untuk Firefox */
+    -ms-user-select: none;     /* Untuk Internet Explorer/Edge lama */
+    user-select: none;
+    z-index: 10;
+}
+.news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.news-card h3 {
+    font-size: 1.3em;
+    color: #301934;
+    margin: 15px 15px 8px 15px;
+    line-height: 1.4; /* Atur line-height yang konsisten untuk judul */
+    pointer-events: none;
+    
+    /* KUNCI: Alokasikan ruang untuk maksimal N baris judul */
+    /* Misalnya, untuk maksimal 2 baris: font-size * line-height * 2 */
+    /* Ini membantu menjaga ruang yang diambil judul lebih konsisten */
+    /* Anda bisa juga set height atau max-height jika lebih presisi */
+    /* height: calc(1.3em * 1.4 * 2); */ /* Contoh: ruang untuk 2 baris */
+
+    /* Terapkan pembatasan baris (line-clamping) */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Batasi judul hingga maksimal 2 baris */
+    line-clamp: 2;         /* Properti standar */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tidak selalu terlihat untuk multi-line, tapi baik untuk ada */
+    min-height: calc(1.3em * 1.4 * 1); /* Pastikan minimal ada ruang untuk 1 baris judul */
+}
+
+.news-card p {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 15px 15px 15px;
+    flex-grow: 1;
+
+    /* Properti untuk membatasi teks ke sejumlah baris tertentu */
+    display: -webkit-box; /* Diperlukan untuk -webkit-line-clamp dan seringkali juga untuk line-clamp standar agar bekerja lintas browser untuk multi-line */
+    -webkit-box-orient: vertical; /* Mengatur orientasi box menjadi vertikal */
+    -webkit-line-clamp: 3; /* Batasi teks hingga 3 baris untuk browser WebKit */
+    line-clamp: 3;         /* Properti standar untuk membatasi teks hingga 3 baris */
+    overflow: hidden;      /* Sembunyikan teks yang berlebih */
+    text-overflow: ellipsis; /* Tambahkan elipsis (...) pada teks yang terpotong (lebih relevan untuk single line, tapi tidak ada salahnya disertakan) */
+    /* Catatan: Elipsis untuk multi-line biasanya sudah ditangani oleh line-clamp + overflow:hidden */
+}
+
+/* Styling untuk Tombol Panah Swiper (jika menggunakan panah default) */
+/* Anda bisa memberi gaya pada kelas .carousel-arrow yang Anda tambahkan atau langsung ke kelas Swiper */
+.news-swiper-container .swiper-button-prev,
+.news-swiper-container .swiper-button-next {
+    color: #301934; /* Warna panah (ungu tua) */
+    background-color: rgba(255, 255, 255, 0.7); /* Latar belakang semi-transparan */
+    border-radius: 50%;
+    width: 40px; /* Sesuaikan ukuran tombol */
+    height: 40px;
+    top: 50%; /* Posisi vertikal di tengah */
+    transform: translateY(-50%); /* Centering vertikal presisi */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.news-swiper-container .swiper-button-prev:hover,
+.news-swiper-container .swiper-button-next:hover {
+    background-color: #301934; /* Background ungu tua saat hover */
+    color: #FFFFFF; /* Panah putih saat hover */
+}
+.news-swiper-container .swiper-button-prev::after, /* Mengubah ukuran ikon panah default */
+.news-swiper-container .swiper-button-next::after {
+    font-size: 18px; /* Ukuran ikon panah */
+    font-weight: bold;
+}
+
+/* Posisi panah (jika ingin di luar area slide) */
+.news-swiper-container .swiper-button-prev {
+    left: -5px; /* Sesuaikan */
+}
+.news-swiper-container .swiper-button-next {
+    right: -5px; /* Sesuaikan */
+}
+
+/* Styling untuk Pagination Swiper (jika Anda menambahkannya) */
+.news-swiper-container .swiper-pagination-bullet {
+    background: #7A5FB0;
+    opacity: 0.5;
+}
+.news-swiper-container .swiper-pagination-bullet-active {
+    background: #301934;
+    opacity: 1;
+} 
+
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -836,39 +1042,6 @@ img {
     width: 100%;
     height: 200px; /* Sesuaikan tinggi gambar berita */
     object-fit: cover;
-}
-
-.news-content {
-    padding: 20px;
-}
-
-.news-content h3 {
-    color: #301934;
-    font-size: 1.4em;
-    margin-bottom: 10px;
-}
-
-.news-date {
-    font-size: 0.85em;
-    color: #777;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.news-content p {
-    font-size: 0.95em;
-    color: #444;
-    margin-bottom: 15px;
-}
-
-.read-more {
-    font-weight: 600;
-    color: #9370DB;
-    transition: color 0.3s ease;
-}
-
-.read-more:hover {
-    color: #7B68EE;
 }
 
 
