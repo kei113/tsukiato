@@ -898,9 +898,10 @@ a.news-card-link:active {
 
 .news-card-content .news-date { /* Tanggal Berita */
     font-size: 0.8em;
-    color: #777777; /* Warna abu-abu untuk tanggal */
+    color: #b313e4; /* Warna abu-abu untuk tanggal */
     margin-bottom: 10px; /* Jarak ke paragraf ringkasan */
     display: block; /* Agar mengambil baris sendiri */
+    padding-left: 15px;
 }
 
 .news-card-content p { /* Ringkasan Berita */
