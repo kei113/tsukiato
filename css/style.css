@@ -97,15 +97,16 @@ img {
 }
 
 .main-header nav {
-    display: flex;
+    display: flex-start;
     /* UBAH BAGIAN INI:
        Alih-alih 'space-between', gunakan 'flex-start' untuk merapatkan semua item ke kiri.
        Atau, Anda bisa menghapus 'justify-content' jika tidak ada item lain yang perlu diatur di sisi kanan NAV ini. */
     align-items: center; /* Tetap tengahkan item secara vertikal */
     max-width: 1100px;   /* Lebar konten utama website Anda */
-    margin: 0 auto;      /* Menengahkan nav di dalam .main-header */
-    padding: 0 20px;     /* Padding internal untuk konten nav agar tidak terlalu menempel ke tepi .main-header jika .main-header tidak punya padding sendiri */
+    margin: 0 12px;      /* Menengahkan nav di dalam .main-header */
+    padding: 0 6px;     /* Padding internal untuk konten nav agar tidak terlalu menempel ke tepi .main-header jika .main-header tidak punya padding sendiri */
     box-sizing: border-box;
+    font-size: large;
 }
 
 .main-header nav ul {
@@ -208,6 +209,13 @@ img {
 .btn-header.btn-join:hover {
     background-color: #7A5FB0; /* Ungu aksen lebih gelap */
     border-color: #7A5FB0;
+    transform: scale(1.11); /* Sedikit efek zoom saat hover */
+}
+
+.btn-header.btn-join:active {
+    background-color: #6A4B8A; /* Ungu aksen lebih gelap saat ditekan */
+    border-color: #6A4B8A;
+    transform: scale(1); /* Kembali ke ukuran normal saat ditekan */
 }
 
 /* Hero Section */
@@ -441,9 +449,9 @@ img {
 }
 
 
-
-
-
+.show {
+    opacity: 1;
+}
 
 
 
@@ -565,6 +573,220 @@ img {
     background-color: #D8BFD8;
     color: #301934; /* Ungu tua */
     transform: scale(1.05);
+}
+
+.hidden-member-details {
+    display: none; /* Menyembunyikan semua blok konten detail */
+}
+
+.member-detail-popup-content {
+    display: flex; /* AKTIFKAN FLEXBOX */
+    align-items: flex-start; /* Menyelaraskan item ke bagian atas. Coba juga 'center' jika lebih suka. */
+    gap: 25px; /* Jarak antara gambar dan blok teks */
+    text-align: left; /* Mengatur teks agar rata kiri di dalam blok teks */
+}
+
+.member-detail-popup-content .member-detail-image-left {
+    flex-shrink: 0; /* Mencegah gambar menyusut jika teks terlalu panjang */
+    width: 400px;     /* Lebar gambar, contoh 35% dari total lebar .member-detail-popup-content */
+    max-width: 820px;/* Lebar absolut maksimum untuk gambar, sesuaikan */
+    height: auto;     /* Menjaga rasio aspek gambar */
+    object-fit: cover;/* Membuat gambar mengisi area dengan baik, mungkin ter-crop */
+    border-radius: 8px; /* Sudut melengkung */
+    border: 2px solid #eee; /* Border halus */
+    /* Hapus margin auto jika ada dari sebelumnya, karena flex yang mengatur posisi */
+}
+
+.member-detail-popup-content .member-detail-text-right {
+    flex-grow: 1; /* Biarkan blok teks ini mengambil sisa ruang yang tersedia */
+    /* Atau Anda bisa set flex-basis: 60%; atau width: 60%; */
+}
+
+.member-detail-text-right .member-title-role {
+    font-size: 1.3em;
+    color: #7A5FB0; /* Warna ungu aksen */
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    /* Jika menggunakan ikon: */
+}
+/* .member-title-role .sparkle-icon {
+    width: 16px; height: 16px; margin-right: 5px;
+} */
+
+.member-detail-text-right h2 { /* Nama Member */
+    font-family: 'Poppins', sans-serif;
+    color: #301934; /* Ungu Tua */
+    font-size: 2.8em; /* Sesuaikan */
+    margin-top: 0; /* Hapus margin atas default */
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.member-detail-text-right .member-attributes {
+    margin-bottom: 15px;
+    text-align: left; /* Atur teks rata kiri */
+}
+
+.member-detail-text-right .member-attributes p {
+    font-size: 0.9em;
+    line-height: 1.7;
+    margin-bottom: 6px;
+    color: #454545; /* Warna teks sedikit lebih gelap */
+}
+
+.member-detail-text-right .member-attributes p strong {
+    color: #301934; /* Ungu Tua untuk label */
+    display: inline-block;
+    min-width: 70px; /* Agar titik dua sejajar (opsional, sesuaikan) */
+    font-weight: 600;
+}
+
+.member-detail-text-right .member-bio {
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f5ff; /* Latar belakang ungu sangat muda untuk bio */
+    border-radius: 6px;
+    color: #333;
+}
+
+.member-detail-text-right .member-social-links {
+    display: flex; /* Mengaktifkan Flexbox */
+    justify-content: center; /* KUNCI: Menengahkan grup ikon secara horizontal */
+                             /* Pilihan lain: 'flex-start' (rata kiri), 'flex-end' (rata kanan) */
+    align-items: center; /* Menyelaraskan ikon secara vertikal jika ukurannya berbeda (biasanya sama) */
+    margin-top: 25px;    /* Jarak dari elemen di atasnya (misalnya bio) */
+    margin-bottom: 10px; /* Jarak ke bagian bawah modal jika ini elemen terakhir */
+    gap: 20px;      /* Atau 'center' jika ingin ikon di tengah blok teks kanan */
+}
+
+.member-detail-text-right .member-social-links .social-icon {
+    display: inline-flex; /* Memastikan link berperilaku baik sebagai flex item */
+    /* Tidak perlu margin di sini jika sudah menggunakan 'gap' pada parent */
+}
+
+.member-detail-text-right .member-social-links .social-icon img {
+    width: 28px;  /* Lebar ikon, sesuaikan */
+    height: 28px; /* Tinggi ikon, sesuaikan */
+    opacity: 0.75; /* Sedikit transparan untuk tampilan yang lebih halus */
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out; /* Transisi halus */
+    vertical-align: middle; /* Membantu alignment jika tidak menggunakan flex align-items */
+}
+
+.member-detail-text-right .member-social-links .social-icon img:hover {
+    opacity: 1; /* Ikon menjadi solid saat di-hover */
+    transform: scale(1.15); /* Sedikit efek membesar saat di-hover */
+}
+
+.member-detail-popup-content .member-detail-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 800px; /* Lebar baru */
+    height: auto;  /* Menjaga rasio aspek */
+    object-fit: cover; /* Untuk memastikan pengisian jika ada batasan tinggi tak terduga */
+    border-radius: 8px;
+}
+
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(30, 10, 30, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+
+    /* Keadaan awal untuk animasi muncul */
+    opacity: 0;
+    visibility: hidden; /* Untuk aksesibilitas dan mencegah interaksi saat tersembunyi */
+    /* Transisi untuk opacity. Visibility diubah setelah opacity selesai. */
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Hapus delay untuk visibility saat aktif */
+}
+
+.modal-container {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    position: relative;
+    max-width: 950px;
+    width: 90%;
+    max-height: 95vh;
+    overflow-y: auto;
+
+    /* Keadaan awal untuk animasi muncul: sedikit lebih kecil dan mungkin sedikit dari bawah/atas */
+    transform: scale(0.9) translateY(20px); /* Mulai dari skala 0.9 dan sedikit di bawah */
+    opacity: 0; /* Mulai transparan */
+
+    /* Transisi untuk transform dan opacity. Beri sedikit delay pada transform agar overlay muncul dulu. */
+    transition: transform 0.25s 0.05s cubic-bezier(0.18, 0.89, 0.32, 1.28), /* Easing 'elastic pop' */
+                opacity 0.2s 0.05s ease-out;
+}
+
+.modal-overlay.active .modal-container {
+    /* Keadaan akhir saat modal aktif/muncul */
+    transform: scale(1) translateY(0); /* Kembali ke ukuran normal dan posisi normal */
+    opacity: 1; /* Sepenuhnya terlihat */
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: #777; /* Warna tombol close */
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+}
+.modal-close-button:hover {
+    color: #301934; /* Warna hover tombol close, sesuaikan dengan tema */
+}
+
+
+.member-detail-popup-content {
+    text-align: center;
+    color: #333;
+    width: 100%;
+}
+
+.member-detail-popup-content .member-detail-image {
+    max-width: 550px;
+    max-height: 600px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 3px solid #eee;
+}
+.member-detail-popup-content h2 {
+    font-family: 'Poppins', sans-serif;
+    color: #301934;
+    margin-bottom: 15px;
+    font-size: 2em;
 }
 
 /* Sesuaikan animasi scroll jika masih digunakan */
@@ -798,5 +1020,42 @@ img {
     .btn {
         padding: 10px 20px;
         font-size: 0.9em;
+    }
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeOutOverlay {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes popUpModal {
+    from { transform: scale(0.8) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes popDownModal {
+    from { transform: scale(1) translateY(0); opacity: 1; }
+    to { transform: scale(0.8) translateY(30px); opacity: 0; }
+}
+
+@media (max-width: 600px) { /* Sesuaikan breakpoint */
+    .member-detail-popup-content {
+        flex-direction: column; /* Susun vertikal */
+        align-items: center; /* Tengahkan item jika vertikal */
+    }
+    .member-detail-popup-content .member-detail-image-left {
+        width: 70%; /* Gambar bisa lebih lebar saat di atas */
+        max-width: 250px; /* Batas atas */
+        margin-bottom: 20px; /* Jarak ke teks di bawah */
+    }
+    .member-detail-popup-content .member-detail-text-right {
+        width: 100%; /* Teks mengambil lebar penuh */
+        text-align: center; /* Atau tetap left, sesuai selera */
+    }
+    .member-detail-text-right .member-social-links {
+        text-align: center;
     }
 }
