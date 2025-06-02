@@ -1117,7 +1117,7 @@ a.tenmondai-panel {
     padding: 20px 25px; /* Padding untuk area teks */
     box-sizing: border-box;
     background-color: #444; /* Warna fallback jika gambar tidak termuat */
-    width: 1000px;
+    width: auto;
 }
 
 a.tenmondai-panel:hover {
