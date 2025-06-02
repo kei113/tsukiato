@@ -20,8 +20,8 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1200px; /* Lebar maksimum konten */
     margin: auto;
     overflow: hidden; /* Clear floats */
     padding: 20px 0;
@@ -1046,6 +1046,109 @@ a.news-card-link:active {
 }
 
 
+.tenmondai-section {
+    padding: 60px 80px; /* Padding atas-bawah dan kiri-kanan untuk section */
+    background-color: #ffffff; /* Warna latar belakang abu-abu sangat muda, sesuaikan */
+}
+
+.tenmondai-title {
+    font-size: 2.8em; /* Ukuran font judul, sesuaikan */
+    color: #301934; /* Warna teks judul, contoh: abu-abu tua kebiruan */
+    text-align: center;
+    margin-bottom: 50px; /* Jarak dari judul ke konten di bawahnya */
+    padding-bottom: 10px; /* Jarak untuk garis bawah */
+    display: inline-block; /* Agar border-bottom hanya selebar teks */
+    position: relative; /* Untuk positioning jika judulnya kompleks */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tenmondai-content-wrapper {
+    display: flex;
+    align-items: center; /* Menyelaraskan logo dan blok panel secara vertikal */
+    justify-content: center; /* Menengahkan grup logo dan panel jika ada sisa ruang */
+    gap: 50px; /* Jarak antara logo dan blok panel menu */
+    max-width: 2900px; /* Lebar maksimum untuk konten ini, agar tidak terlalu melebar */
+    margin: 0 auto; /* Menengahkan wrapper ini */
+}
+
+.tenmondai-logo img {
+    width: 400px;
+    height: 400px;
+    object-fit: fill; /* Memastikan gambar mengisi area logo */
+}
+
+.tenmondai-panels {
+    display: flex;
+    flex-direction: column; /* Menyusun panel secara vertikal */
+    gap: 15px; /* Jarak antar panel */
+    width: 850px; /* Lebar untuk blok panel, sesuaikan */
+    padding: 25px 30px;
+    overflow: hidden; /* Agsar panel tidak keluar dari batas */
+}
+
+.panel-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* KUNCI: Gambar akan menutupi seluruh area panel, mempertahankan rasio aspeknya (mungkin ter-crop) */
+    z-index: -1;       /* KUNCI: Meletakkan gambar di belakang konten panel (teks) */
+    transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+    opacity: 0.7; /* Buat gambar sedikit redup agar teks lebih terbaca, sesuaikan */
+}
+
+a.tenmondai-panel {
+    display: flex; /* Menggunakan flex untuk menengahkan teks di panel (opsional) */
+    align-items: center; /* Menyelaraskan teks secara vertikal di tengah */
+    justify-content: flex-start; /* Menyelaraskan teks ke kiri (sesuai contoh Anda) */
+    /* Jika ingin teks di tengah panel: justify-content: center; text-align: center; */
+
+    position: relative; /* PENTING: Agar .panel-background-image bisa diposisikan absolut relatif terhadap ini */
+    overflow: hidden; /* PENTING: Memotong gambar agar sesuai bentuk panel dan sudut melengkung */
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Sedikit perbarui shadow */
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    color: #FFFFFF; /* Warna teks panel (putih agar kontras dengan gambar gelap atau overlay) */
+    
+    min-height: 90px; /* Beri tinggi minimal untuk panel, sesuaikan */
+    /* Anda bisa juga menggunakan aspect-ratio jika ingin proporsi tetap, misal: aspect-ratio: 16 / 6; */
+    padding: 20px 25px; /* Padding untuk area teks */
+    box-sizing: border-box;
+    background-color: #444; /* Warna fallback jika gambar tidak termuat */
+    width: 1000px;
+}
+
+a.tenmondai-panel:hover {
+    transform: translateY(-5px) scale(1.03); /* Efek mengangkat dan sedikit membesar */
+    background-color: #dcdcdc; /* Warna latar sedikit berubah saat hover */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    /* z-index: 2; */ /* Jika perlu muncul di atas elemen lain saat hover */
+}
+
+a.tenmondai-panel:active {
+    transform: translateY(-2px) scale(1.01); /* Efek saat diklik */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+a.tenmondai-panel:hover .panel-background-image {
+    opacity: 1; /* Gambar menjadi lebih jelas saat di-hover */
+}
+
+/* Teks di dalam Panel */
+.panel-text {
+    position: relative; /* Agar z-index efektif di atas gambar dengan z-index -1 */
+    z-index: 1; /* Pastikan teks di atas gambar */
+    font-size: 1.2em; /* Ukuran font teks panel, sesuaikan */
+    font-weight: 600;
+    /* Tambahkan bayangan teks agar lebih mudah dibaca di atas berbagai macam gambar */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6), 0 0 5px rgba(0,0,0,0.5);
+}
+
+
+
+
 /* Footer */
 .main-footer {
     background-color: #680dbd;
@@ -1231,5 +1334,33 @@ a.news-card-link:active {
     }
     .member-detail-text-right .member-social-links {
         text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .tenmondai-content-wrapper {
+        flex-direction: column; /* Susun logo di atas panel pada layar kecil */
+        gap: 30px;
+    }
+    .tenmondai-logo {
+        width: 150px; /* Perkecil logo */
+        height: 150px;
+        font-size: 1.2em;
+        margin-bottom: 10px; /* Jarak dari logo ke panel pertama */
+    }
+    .tenmondai-panels {
+        width: 100%; /* Panel mengambil lebar penuh */
+        max-width: 350px; /* Tapi tidak lebih dari ini */
+        align-items: center; /* Jika ingin panel terpusat saat 100% width */
+    }
+    .tenmondai-title {
+        font-size: 2.2em; /* Perkecil judul */
+    }
+    a.tenmondai-panel {
+        width: 100%; /* Panel mengambil lebar penuh di dalam .tenmondai-panels */
+        text-align: center; /* Tengahkan teks di panel pada layar kecil */
+    }
+    .panel-text {
+        font-size: 1.1em; /* Sesuaikan ukuran font teks panel untuk mobile */
     }
 }
