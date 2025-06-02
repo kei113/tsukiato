@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalOverlay = document.getElementById('memberDetailModalOverlay');
     const modalDynamicContent = document.getElementById('modalDynamicContent');
     const closeModalButton = modalOverlay.querySelector('.modal-close-button');
+    const navLinks = document.querySelectorAll('.main-nav-links a[href^="#"]');
 
     if (!modalOverlay || !modalDynamicContent || !closeModalButton) {
         console.error("Elemen modal tidak ditemukan. Pop-up tidak akan berfungsi.");
@@ -83,5 +84,37 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
             closeModal();
         }
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah perilaku default melompat langsung
+
+            const targetId = this.getAttribute('href'); // Dapatkan ID target (misal: "#news")
+            const targetElement = document.querySelector(targetId); // Cari elemen dengan ID tersebut
+
+            if (targetElement) {
+                // Hitung posisi header jika sticky/fixed (opsional)
+                const header = document.querySelector('.main-header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                // Scroll ke elemen target dengan animasi smooth
+                // Opsi 1: Menggunakan window.scrollTo dengan offset
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Opsi 2: Langsung ke elemen (mungkin tidak selalu memperhitungkan header dengan baik tanpa CSS scroll-padding-top)
+                // targetElement.scrollIntoView({
+                //     behavior: 'smooth',
+                //     block: 'start' // atau 'center'
+                // });
+            } else {
+                console.warn('Elemen target untuk smooth scroll tidak ditemukan:', targetId);
+            }
+        });
     });
 });
