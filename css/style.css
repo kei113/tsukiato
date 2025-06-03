@@ -256,20 +256,11 @@ img {
                    /* Semakin besar nilainya, semakin landai/panjang gradasinya */
 
     /* KUNCI: Buat gradasi linear dari transparan ke warna latar section berikutnya */
-    /* GANTI #F8F8FF dengan warna latar belakang aktual dari .profile-section Anda */
         background: linear-gradient(to bottom,
         rgba(200, 90, 219, 0) 80%,    /* Mulai transparan di 0% (atas) */
         rgba(200, 90, 219, 0) 90%,   /* Tetap transparan sampai 40% dari atas */
         #F0E8FF 100%                 /* Lalu memudar ke solid #F8F8FF di 100% (bawah) */
     );
-
-    /* Penjelasan:
-       - rgba(248, 248, 255, 0): Warna awal gradasi (transparan). RGB-nya bisa disamakan dengan warna akhir
-         agar transisi lebih halus jika ada sisa warna dari overlay gelap hero.
-       - #F8F8FF: Warna akhir gradasi (harus sama dengan background .profile-section).
-                 Jika .profile-section Anda putih (#FFFFFF), ganti menjadi:
-                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #FFFFFF);
-    */
 
     z-index: 2; /* Atur z-index agar gradasi ini muncul di atas video/gambar background hero,
                    tetapi di bawah konten utama hero (.hero-content).
@@ -1067,10 +1058,34 @@ a.news-card-link:active {
 .tenmondai-title {
     font-size: 2.8em; /* Ukuran font judul, sesuaikan */
     color: #a528ff; /* Warna teks judul, contoh: abu-abu tua kebiruan */
-    text-align: center;
+    align-items: center;
     padding-bottom: 10px; /* Jarak untuk garis bawah */
-    display: inline-block; /* Agar border-bottom hanya selebar teks */
-    left: 50%;
+    display: inline-flex; /* Agar border-bottom hanya selebar teks */
+    gap: 20px; /* Adjust the spacing between the decorations and the text */
+}
+
+.title-decoration {
+    display: inline-block; /* Allows setting width and height */
+    width: 60px; /* Adjust the size of the star decorations */
+    height: 60px;
+    /* You might need to adjust vertical alignment further based on your image */
+    line-height: 0;
+}
+
+.title-decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Or 'cover' depending on your image */
+    display: block;
+    -webkit-user-select: none; /* Untuk browser Safari dan Chrome lama */
+    -moz-user-select: none;    /* Untuk Firefox */
+    -ms-user-select: none;     /* Untuk Internet Explorer/Edge lama */
+    user-select: none;
+}
+
+/* Animation for the stars */
+.rotate {
+    animation: spin 4s linear infinite; /* 'spin' is the animation name, 4s is the duration per rotation, 'linear' for constant speed, 'infinite' to repeat */
 }
 
 .tenmondai-logo-top {
@@ -1176,8 +1191,266 @@ a.tenmondai-panel:hover .panel-background-image {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.6), 0 0 5px rgba(0,0,0,0.5);
 }
 
+.discography-section {
+    padding: 60px 20px;
+    background-color: #f9f5ff; /* Warna latar ungu sangat muda, sesuaikan */
+}
+
+.discography-section h2 {
+    text-align: center;
+    color: #a528ff; /* Ungu Tua */
+    font-size: 3.5em;
+    margin-bottom: 50px; /* Beri jarak lebih ke kartu */
+}
+
+.discography-grid {
+    display: grid;
+    /* Membuat kolom responsif, sesuaikan minmax untuk ukuran kartu yang diinginkan */
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px; /* Jarak antar kartu video */
+    max-width: 1000px; /* Lebar maksimum grid */
+    margin: 0 auto;    /* Menengahkan grid */
+}
+
+.video-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden; /* Penting untuk sudut melengkung dan play-button-overlay */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    background-color: #e0e0e0; /* Warna fallback jika thumbnail tidak ada */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.video-card:hover {
+    transform: scale(1.05); /* Animasi membesar saat hover */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 5; /* Agar kartu yang dihover sedikit di atas yang lain */
+}
+
+.video-thumbnail-container {
+    position: relative;
+    width: 100%;
+    /* Untuk rasio aspek 16:9 pada thumbnail */
+    padding-top: 56.25%; /* (9 / 16) * 100% */
+    height: 0;
+    overflow: hidden;
+    background-color: #222; /* Warna jika gambar gagal dimuat */
+}
+
+.video-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar thumbnail akan menutupi area */
+    display: block;
+}
+
+.play-button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.4); /* Overlay gelap transparan */
+    opacity: 0; /* Awalnya transparan */
+    transition: opacity 0.3s ease;
+}
+
+.video-card:hover .play-button-overlay {
+    opacity: 1; /* Munculkan overlay dan ikon play saat hover */
+}
+
+.play-icon {
+    font-size: 60px; /* Ukuran ikon play */
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+    line-height: 1;
+}
+
+.video-card-title {
+    padding: 12px 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #301934; /* Ungu Tua */
+    background-color: #ffffff;
+    text-align: center;
+    white-space: nowrap; /* Mencegah judul jadi 2 baris jika terlalu panjang */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tambahkan ... jika judul terlalu panjang */
+}
+
+.floating-social-widget {
+    position: fixed; /* Membuatnya melayang relatif terhadap viewport */
+    bottom: 25px;    /* Jarak dari bawah viewport */
+    left: 25px;      /* Jarak dari kiri viewport */
+    z-index: 1000;   /* Pastikan di atas elemen lain */
+
+    /* Keadaan Awal (Saat Hanya Logo Utama Terlihat) */
+    width: 90px;     /* Lebar awal sama dengan logo */
+    height:90px;    /* Tinggi awal sama dengan logo */
+    border-radius: 50%; /* Membuatnya lingkaran */
+    padding: 0;
+    background-color: #ffffff; /* Warna latar logo utama */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    
+    display: flex;
+    flex-direction: column-reverse; /* Item terakhir (logo utama) akan di bawah secara visual */
+    align-items: center;
+    justify-content: flex-end; /* Mendorong konten ke bawah (logo utama akan di paling bawah) */
+    
+    overflow: hidden; /* Penting untuk animasi memanjang dan border-radius */
+    
+    /* Transisi untuk semua properti yang berubah saat hover */
+    transition: width 0.3s ease-out, 
+                height 0.3s ease-out, 
+                padding 0.3s ease-out,
+                background-color 0.3s ease-out,
+                border-color 0.3s ease-out,
+                box-shadow 0.3s ease-out;
+                
+}
 
 
+.floating-social-widget:hover {
+    /* Keadaan Saat Widget Memanjang (Hover) */
+    width: 90px; /* Lebar kapsul yang memanjang */
+    /* Tinggi akan menyesuaikan dengan konten, atau bisa di set min-height */
+    height: 300px; /* Perkiraan tinggi untuk 4 ikon + logo + padding. SESUAIKAN! */
+    border-radius: 50px; /* Membuat bentuk kapsul (setengah dari width) */
+    background-color: rgba(255, 255, 255, 0.97); /* Warna latar bar yang memanjang */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    padding-top: 0px; /* Padding atas untuk bar yang memanjang */
+    padding-bottom: 8px; /* Padding bawah (di bawah logo utama) untuk bar yang memanjang */
+    animation: widgetBounceExpand 0.5s ease-out forwards; 
+    
+}
+
+.floating-social-widget::before { /* Elemen semu untuk memperluas area hover */
+    content: "";
+    position: absolute;
+    /* Membuatnya sedikit lebih besar dari widget (yang awalnya 60x60) */
+    top: -10px;  /* 10px lebih atas */
+    left: -10px; /* 10px lebih kiri */
+    right: -10px;/* 10px lebih kanan */
+    bottom: -10px;/* 10px lebih bawah */
+    border-radius: 50%; /* Jaga bentuk lingkaran untuk area hover */
+    /* background-color: rgba(255, 0, 0, 0.2); */ /* HANYA UNTUK DEBUGGING AREA HOVER, HAPUS SETELAHNYA */
+    z-index: -1; /* Letakkan di belakang konten visual widget, tapi tetap bagian dari widget untuk hover */
+}
+
+.main-logo-float {
+    width: 90px; /* Ukuran logo utama di dalam widget (sedikit lebih kecil dari widget awal) */
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Pastikan logo punya background jika widgetnya transparan saat hover */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Shadow internal kecil untuk logo */
+    flex-shrink: 0; /* Mencegah logo menyusut */
+    margin-bottom: 20px; /* Sedikit jarak jika padding-bottom widget belum pas */
+}
+
+.main-logo-float img {
+    width: 100%; /* Sesuaikan agar logo pas di dalam lingkaran */
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.social-icons-expanded {
+    display: flex;
+    flex-direction: column; /* Ikon tersusun vertikal */
+    align-items: center;
+    gap: 15px; /* Jarak antar ikon sosial media */
+    width: 100%; /* Mengambil lebar penuh dari .floating-social-widget */
+    
+    /* Animasi muncul untuk ikon */
+    max-height: 0; /* Awalnya tinggi 0 (tersembunyi) */
+    opacity: 0;
+    visibility: hidden;
+    margin-bottom: 0; /* Jarak dari ikon terakhir ke logo utama */
+    
+    /* Transisi untuk max-height, opacity, dan visibility */
+    /* Delay opacity dan max-height agar muncul setelah widget mulai memanjang */
+    transition: max-height 0.3s 0.1s ease-in-out, 
+                opacity 0.2s 0.15s ease-in-out, 
+                visibility 0s linear 0.4s; 
+}
+
+.floating-social-widget:hover .social-icons-expanded {
+    max-height: 200px; /* Tinggi yang cukup untuk semua ikon. SESUAIKAN! */
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Hapus delay visibility saat muncul */
+}
+
+.social-icon-item {
+    opacity: 0; /* Awalnya transparan */
+    transform: translateY(15px); /* Awalnya sedikit turun (untuk efek muncul dari bawah) */
+    transition-property: opacity, transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    display: block;
+    /* transition-delay akan diatur per item di bawah */
+}
+
+.social-icon-item img {
+    object-fit: contain; /* Agar ikon tidak terdistorsi */
+    opacity: 0.8; /* Sedikit transparan secara default */
+    
+    /* Transisi untuk efek hover pada ikon */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    
+    /* Pastikan pointer-events tidak none di sini jika ingin hover bekerja */
+    pointer-events: auto; /* Default, pastikan tidak di-override menjadi none */
+}
+
+.social-icon-item img:hover {
+    transform: scale(1.15); /* Ikon sedikit membesar */
+    opacity: 1;             /* Opacity menjadi penuh */
+}
+
+.floating-social-widget:hover .social-icon-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pengaturan delay untuk animasi staggered (muncul satu per satu dari bawah ke atas) */
+/* Asumsi ada 4 ikon. TikTok adalah anak ke-4 (paling bawah), X adalah anak ke-1 (paling atas). */
+/* Kita ingin anak ke-4 muncul duluan, jadi delaynya paling kecil. */
+.floating-social-widget:hover .social-icon-item:nth-child(4) { /* TikTok (paling bawah) */
+    transition-delay: 0.20s; /* Muncul setelah kontainer sedikit memanjang */
+}
+.floating-social-widget:hover .social-icon-item:nth-child(3) { /* YouTube */
+    transition-delay: 0.28s;
+}
+.floating-social-widget:hover .social-icon-item:nth-child(2) { /* Instagram */
+    transition-delay: 0.36s;
+}
+.floating-social-widget:hover .social-icon-item:nth-child(1) { /* X (paling atas) */
+    transition-delay: 0.44s; /* Muncul terakhir */
+}
+
+.social-icon-item img {
+    width: 30px;  /* Ukuran ikon sosial media */
+    height: 30px;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    pointer-events: none;
+}
+
+.social-icon-item img:hover {
+    transform: scale(1.15); /* Efek zoom pada ikon sosial */
+    opacity: 1;
+}
 
 /* Footer */
 .main-footer {
@@ -1226,7 +1499,7 @@ a.tenmondai-panel:hover .panel-background-image {
     color: #FFFFFF;
 }
 
-.hero-content h1 img#idolLogo { /* Atau gunakan selector yang lebih spesifik jika perlu */
+.hero-content h1 img { /* Atau gunakan selector yang lebih spesifik jika perlu */
     /* ... gaya ukuran gambar Anda yang sudah ada ... */
 
     /* Membuat gambar tidak merespons event mouse (termasuk klik kanan dan drag) */
@@ -1392,5 +1665,127 @@ a.tenmondai-panel:hover .panel-background-image {
     }
     .panel-text {
         font-size: 1.1em; /* Sesuaikan ukuran font teks panel untuk mobile */
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Apply the rotate class to the decoration images */
+.left-star img,
+.right-star img {
+    pointer-events: none; /* Prevent interaction with the decorative images */
+}
+
+.left-star img {
+    animation: spin-left 5s linear infinite; /* Slightly different timing for variation */
+}
+
+.right-star img {
+    animation: spin-right 3s linear infinite reverse; /* Different timing and reverse direction */
+}
+
+@keyframes spin-left {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spin-right {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); } /* Reverse direction */
+}
+
+/* Styling untuk Modal Video Player */
+/* Anda bisa menggunakan styling .modal-overlay dan .modal-container yang sudah ada,
+   tapi mungkin perlu penyesuaian untuk konten video. */
+
+#videoPlayerModalOverlay .modal-container { /* Target spesifik jika perlu */
+    /* background-color: #000; */ /* Latar modal bisa hitam untuk video */
+    padding: 10px; /* Padding lebih kecil agar video lebih dominan */
+    max-width: 900px; /* Lebar modal bisa lebih besar untuk video */
+    aspect-ratio: 16 / 9.5; /* Jaga rasio aspek modal agar pas dengan video, plus sedikit ruang untuk close button */
+    overflow: visible; /* Agar video iframe bisa full */
+    max-height: 90vh; /* Tetap batasi tinggi */
+}
+
+/* Wrapper untuk iframe agar responsif */
+.video-iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio ( (9/16)*100% ) */
+    height: 0;
+    overflow: hidden;
+    background-color: #000; /* Latar hitam saat video loading */
+}
+
+.video-iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+
+#videoPlayerModalOverlay .modal-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Warna latar sedikit lebih gelap saat hover */
+    transform: scale(1.1); /* Sedikit membesar saat hover */
+}
+
+/* Tombol close untuk modal video mungkin perlu sedikit penyesuaian posisi/warna */
+#videoPlayerModalOverlay .modal-close-button {
+    position: absolute;
+    /* Eksperimen dengan nilai top dan right berikut untuk posisi yang diinginkan */
+    /* Opsi 1: Tombol sedikit keluar dari sudut kanan atas (mirip screenshot Anda tapi mungkin lebih rapi) */
+    top: -12px;   /* Geser ke atas dari tepi atas .modal-container. Sesuaikan. */
+    right: -30px; /* Geser ke kanan dari tepi kanan .modal-container. Sesuaikan. */
+
+    width: 30px;  /* Lebar tombol close */
+    height: 30px; /* Tinggi tombol close */
+    background-color: rgba(40, 40, 40, 0.75); /* Warna latar tombol, contoh: abu-abu gelap transparan */
+    color: #FFFFFF; /* Warna ikon 'X' (putih) */
+    border-radius: 50%; /* Membuatnya lingkaran */
+    border: none; /* Hapus border default jika ada */
+    
+    display: flex; /* Untuk menengahkan ikon 'X' di dalam lingkaran */
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 18px;  /* Ukuran ikon 'X', sesuaikan agar pas di lingkaran */
+    font-weight: bold; /* Bisa juga 'normal' */
+    line-height: 1;   /* Bantu centering vertikal teks */
+    text-align: center; /* Redundan jika sudah display:flex dan justify/align center */
+    
+    cursor: pointer;
+    z-index: 15; /* Pastikan di atas konten modal jika ada yang tumpang tindih */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+@keyframes widgetBounceExpand {
+    0% {
+        /* Keadaan awal (lingkaran kecil) */
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        padding: 0;
+        border-color: transparent; /* Jika border awal transparan */
+    }
+    60% {
+        /* Tahap "overshoot" atau pantulan - sedikit lebih besar dari ukuran akhir */
+        width: 95px;  /* Sedikit lebih lebar dari target akhir (70px) */
+        height: 315px; /* Sedikit lebih tinggi dari target akhir (240px) */
+        border-radius: 52.5px; /* Radius antara lingkaran dan kapsul */
+        padding: 12px 0px;
+    }
+    100% {
+        /* Keadaan akhir setelah memantul (kapsul memanjang) */
+        width: 90px;
+        height: 300px; /* Tinggi target yang Anda inginkan dari sebelumnya */
+        border-radius: 50px; /* Bentuk kapsul (setengah dari width: 70px) */
+        padding-top: 0px;
+        padding-bottom: 8px;
     }
 }
