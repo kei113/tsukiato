@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalButton = modalOverlay.querySelector('.modal-close-button');
     const navLinks = document.querySelectorAll('.main-nav-links a[href^="#"]');
 
+    const videoCards = document.querySelectorAll('.video-card');
+    const videoModalOverlay = document.getElementById('videoPlayerModalOverlay');
+    const videoModalContent = document.getElementById('videoPlayerModalContent');
+    const videoModalCloseButton = videoModalOverlay ? videoModalOverlay.querySelector('.modal-close-button') : null;
+
     if (!modalOverlay || !modalDynamicContent || !closeModalButton) {
         console.error("Elemen modal tidak ditemukan. Pop-up tidak akan berfungsi.");
         return;
@@ -117,4 +122,56 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    if (videoModalOverlay && videoModalContent && videoModalCloseButton) {
+        videoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const youtubeId = this.dataset.youtubeId; // Mengambil ID video dari kartu yang diklik
+                console.log("Kartu diklik, YouTube ID:", youtubeId); // Untuk Debugging
+
+                if (youtubeId) {
+                    // URL embed YouTube yang benar
+                    const embedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+                    console.log("URL iframe yang akan dimuat:", embedUrl); // Untuk Debugging
+
+                    videoModalContent.innerHTML = `
+                        <iframe 
+                            src="${embedUrl}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>`;
+                    
+                    videoModalOverlay.classList.add('active');
+                } else {
+                    console.warn("Tidak ada data-youtube-id pada kartu ini:", this);
+                    videoModalContent.innerHTML = '<p style="text-align:center; color:red;">Error: ID Video tidak ditemukan pada kartu.</p>';
+                    videoModalOverlay.classList.add('active');
+                }
+            });
+        });
+
+        function closeVideoModal() {
+            videoModalOverlay.classList.remove('active');
+            setTimeout(() => {
+                videoModalContent.innerHTML = ''; // Menghentikan video dan membersihkan modal
+            }, 300); 
+        }
+
+        videoModalCloseButton.addEventListener('click', closeVideoModal);
+        videoModalOverlay.addEventListener('click', function(event) {
+            if (event.target === videoModalOverlay) {
+                closeVideoModal();
+            }
+        });
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && videoModalOverlay.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
+
+    } else {
+        console.warn("Elemen untuk modal video player tidak ditemukan semua.");
+    }
 });
